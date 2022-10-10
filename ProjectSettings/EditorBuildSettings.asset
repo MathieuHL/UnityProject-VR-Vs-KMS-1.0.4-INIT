@@ -9,7 +9,11 @@ EditorBuildSettings:
     path: Assets/VR-Vs-KMS/Scenes/GameScene.unity
     guid: 30347d40228ce1a4888f1f7c7e1cd1f6
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 42bb17329c319fd41a059ae6e1fb76e2,
+      type: 2}
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: c31655b692ff6f247b11f589b38b5708,
+      type: 2}
+    Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 71e738b3149f9a1439e6f8e8c9542d23,
       type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 01d778de05ae34e43b314774a088ef56,
       type: 2}

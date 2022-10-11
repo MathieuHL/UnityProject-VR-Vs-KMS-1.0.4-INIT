@@ -1684,6 +1684,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 168408d0b7cf67649b6e706427f65cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabPlayer: {fileID: 1433100943268879166, guid: f2880b0bd41bd2b4b860a8ca26a9c6cb,
+    type: 3}
 --- !u!1001 &472122238
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -24,8 +24,8 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
     {
         _quickStartBtn.SetActive(false);
         _quickCancelBtn.SetActive(true);
-        PhotonNetwork.JoinRandomRoom();
         PhotonNetwork.NickName = usernameIF.text;
+        PhotonNetwork.JoinRandomRoom();
         Debug.Log("QuickStart");
     }
 

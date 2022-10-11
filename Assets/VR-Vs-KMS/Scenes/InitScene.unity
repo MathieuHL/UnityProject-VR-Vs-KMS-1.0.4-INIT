@@ -2459,6 +2459,7 @@ MonoBehaviour:
   _quickStartBtn: {fileID: 2004205199}
   _quickCancelBtn: {fileID: 2004803561}
   _roomSize: 10
+  usernameIF: {fileID: 1411918032}
 --- !u!1001 &408797987
 PrefabInstance:
   m_ObjectHideFlags: 0

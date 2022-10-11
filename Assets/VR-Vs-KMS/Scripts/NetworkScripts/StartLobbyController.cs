@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
     using Photon.Realtime;
+using TMPro;
 
 public class StartLobbyController : MonoBehaviourPunCallbacks
 {
@@ -10,6 +11,8 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
     private GameObject _quickStartBtn, _quickCancelBtn;
     [SerializeField]
     private int _roomSize;
+    [SerializeField]
+    TMP_InputField usernameIF;
 
     public override void OnConnectedToMaster()
     {
@@ -22,6 +25,7 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
         _quickStartBtn.SetActive(false);
         _quickCancelBtn.SetActive(true);
         PhotonNetwork.JoinRandomRoom();
+        PhotonNetwork.NickName = usernameIF.text;
         Debug.Log("QuickStart");
     }
 

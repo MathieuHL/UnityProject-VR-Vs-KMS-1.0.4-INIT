@@ -5,7 +5,6 @@ using UnityEngine;
 public enum UserDeviceType
 {
     HTC,
-    Oculus,
     PC
 }
 public class UserDeviceManager : MonoBehaviour
@@ -23,11 +22,6 @@ public class UserDeviceManager : MonoBehaviour
                 Debug.LogWarning("AppConfig asked for HTC, but not active, so use PC version");
                 return UnityEngine.XR.XRSettings.isDeviceActive ? UserDeviceType.HTC : UserDeviceType.PC;
 
-            case "oculus":
-                // Si l'app config demande du Oculus mais que le casque n'est pas branché
-                Debug.LogWarning("AppConfig asked for HTC, but not active, so use PC version");
-                return UnityEngine.XR.XRSettings.isDeviceActive ? UserDeviceType.HTC : UserDeviceType.PC;
-
             case "pc":
                 return UserDeviceType.PC;
 
@@ -39,6 +33,7 @@ public class UserDeviceManager : MonoBehaviour
     public static GameObject GetPrefabToSpawnWithDeviceUsed(GameObject pcPrefab, GameObject HTCPrefab)
     {
         UserDeviceType userDeviceType = GetDeviceUsed();
+        Debug.Log(userDeviceType);
         switch (userDeviceType)
         {
             case UserDeviceType.HTC:

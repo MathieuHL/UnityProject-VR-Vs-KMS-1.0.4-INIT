@@ -3814,6 +3814,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add0e3019b193464d9c1092396cb0bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pcPrefab: {fileID: 1433100943268879166, guid: f2880b0bd41bd2b4b860a8ca26a9c6cb,
+    type: 3}
+  vrPrefab: {fileID: 8958881151813601045, guid: 5658b7e1f0b290846835e0902b58ce07,
+    type: 3}
 --- !u!1001 &717305872
 PrefabInstance:
   m_ObjectHideFlags: 0

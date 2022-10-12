@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class NetworkController : MonoBehaviourPunCallbacks
 {
+    public GameObject pcPrefab, vrPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings(); // Connect to Photon Master
+        UserDeviceManager.GetPrefabToSpawnWithDeviceUsed(pcPrefab, vrPrefab);
     }
 
     public override void OnConnectedToMaster()

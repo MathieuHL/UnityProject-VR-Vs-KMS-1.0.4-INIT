@@ -6,6 +6,7 @@ TagManager:
   tags:
   - freeLookCam
   - ethanHips
+  - VRCam
   layers:
   - Default
   - TransparentFX

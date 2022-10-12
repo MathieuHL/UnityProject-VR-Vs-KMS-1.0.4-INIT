@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 8958881151808090275}
   m_Layer: 0
   m_Name: VRCamera
-  m_TagString: MainCamera
+  m_TagString: VRCam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1243,9 +1243,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8958881151813793645}
   - component: {fileID: 8958881151806969441}
-  - component: {fileID: 5565132961397186916}
-  - component: {fileID: 5545403418327583007}
-  - component: {fileID: 8865957342793885637}
+  - component: {fileID: 5592173007740541262}
+  - component: {fileID: 5497178183532257487}
+  - component: {fileID: 8237502448318606902}
+  - component: {fileID: 5011149001423547395}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1302,7 +1303,7 @@ MonoBehaviour:
     actionPath: /actions/default/in/HeadsetOnHead
     needsReinit: 0
   allowToggleTo2D: 1
---- !u!114 &5565132961397186916
+--- !u!114 &5592173007740541262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1321,12 +1322,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 5545403418327583007}
-  - {fileID: 8865957342793885637}
+  - {fileID: 5497178183532257487}
+  - {fileID: 8237502448318606902}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &5545403418327583007
+--- !u!114 &5497178183532257487
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1342,7 +1343,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &8865957342793885637
+--- !u!114 &8237502448318606902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1358,6 +1359,25 @@ MonoBehaviour:
   synchronizeRotation: 0
   synchronizeScale: 0
   SynchronizedChildTransform: []
+--- !u!114 &5011149001423547395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8958881151813601045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b96acb3ee5f6d499d86a21b41f7530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SteamVRLeft: {fileID: 8958881151813505497}
+  SteamVRRight: {fileID: 8958881151813489131}
+  SteamVRCamera: {fileID: 8958881151813586611}
+  UserOtherLeftHandModel: {fileID: 1000013597184258, guid: 057574477c20401448aba7c848873712,
+    type: 3}
+  UserOtherRightHandModel: {fileID: 1000010184414672, guid: 5dc81ef5cae96304586abbc6e4b5beb8,
+    type: 3}
 --- !u!1 &8958881151813601501
 GameObject:
   m_ObjectHideFlags: 0

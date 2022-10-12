@@ -24,7 +24,6 @@ public class GameSetupController : MonoBehaviourPunCallbacks
         }
         else
         {
-            // TODO: Instantiate the prefab representing my own avatar only if it is UserMe
             if (UserPhotonScript.UserMeInstance == null)
             {
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);

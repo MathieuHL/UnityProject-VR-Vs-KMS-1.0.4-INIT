@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -29,8 +30,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
+        public GameObject cam;
+		public GameObject player;
+		private float camForward;
+		private float playerForward;
+		private float turnAngle;
 
-		void Start()
+
+        void Start()
 		{
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
@@ -45,17 +52,28 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
-
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
 			// direction.
 			if (move.magnitude > 1f) move.Normalize();
-			move = transform.InverseTransformDirection(move);
-			CheckGroundStatus();
+            move = transform.InverseTransformDirection(move);
+            CheckGroundStatus();
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2(move.x, move.z);
-			m_ForwardAmount = move.z;
+            m_TurnAmount = Mathf.Atan2(move.x, move.z);
 
+			camForward = cam.transform.eulerAngles.y;
+            playerForward = player.transform.eulerAngles.y;
+
+			turnAngle = camForward - playerForward;
+			if (turnAngle > 180)
+				turnAngle -= 360;
+			else if (turnAngle < -180)
+				turnAngle += 360;
+
+			if ( move.Equals(new Vector3(0,0,0)) )
+				m_TurnAmount = turnAngle / 45;
+
+            m_ForwardAmount = move.z;
 			ApplyExtraTurnRotation();
 
 			// control and velocity handling is different when grounded and airborne:

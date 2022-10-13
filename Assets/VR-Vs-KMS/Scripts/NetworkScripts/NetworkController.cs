@@ -11,7 +11,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        PhotonNetwork.ConnectUsingSettings(); // Connect to Photon Master
+        //PhotonNetwork.ConnectUsingSettings(); // Connect to Photon Master
         UserDeviceManager.GetPrefabToSpawnWithDeviceUsed(pcPrefab, vrPrefab);
         
         Instance = this;

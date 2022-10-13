@@ -4,24 +4,36 @@ using UnityEngine;
 using Photon.Pun;
 
 [RequireComponent(typeof(PhotonView))]
-public class PhotonTransformChilView : MonoBehaviourPunCallbacks, IPunObservable
+public class PhotonTransformChildView : MonoBehaviourPunCallbacks, IPunObservable
 {
-    public bool synchronizePosition, synchronizeRotation, synchronizeScale;
+    public bool SynchronizePosition = true;
+    public bool SynchronizeRotation = true;
+    public bool SynchronizeScale = false;
 
     public List<Transform> SynchronizedChildTransform;
     private List<Vector3> localPositionList;
     private List<Quaternion> localRotationList;
     private List<Vector3> localScaleList;
 
+    // Start is called before the first frame update
     void Awake()
     {
+        Debug.Log("Awake " + SynchronizedChildTransform.Count);
         localPositionList = new List<Vector3>(SynchronizedChildTransform.Count);
-        localRotationList = new List<Quaternion>(SynchronizedChildTransform.Count);
-        localScaleList = new List<Vector3>(SynchronizedChildTransform.Count);
-        foreach (Transform element in SynchronizedChildTransform)
+        for (int i = 0; i < SynchronizedChildTransform.Count; i++)
         {
             localPositionList.Add(Vector3.zero);
+        }
+
+        localRotationList = new List<Quaternion>(SynchronizedChildTransform.Count);
+        for (int i = 0; i < SynchronizedChildTransform.Count; i++)
+        {
             localRotationList.Add(Quaternion.identity);
+        }
+
+        localScaleList = new List<Vector3>(SynchronizedChildTransform.Count);
+        for (int i = 0; i < SynchronizedChildTransform.Count; i++)
+        {
             localScaleList.Add(Vector3.one);
         }
     }
@@ -29,28 +41,32 @@ public class PhotonTransformChilView : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < SynchronizedChildTransform.Count; i++)
+        if (!photonView.IsMine)
         {
-            if (synchronizePosition) SynchronizedChildTransform[i].localPosition = localPositionList[i];
-            if (synchronizeRotation) SynchronizedChildTransform[i].localRotation = localRotationList[i];
-            if (synchronizeScale) SynchronizedChildTransform[i].localScale = localScaleList[i];
+            for (int i = 0; i < SynchronizedChildTransform.Count; i++)
+            {
+                if (SynchronizePosition) SynchronizedChildTransform[i].localPosition = localPositionList[i];
+                if (SynchronizeRotation) SynchronizedChildTransform[i].localRotation = localRotationList[i];
+                if (SynchronizeScale) SynchronizedChildTransform[i].localScale = localScaleList[i];
+            }
         }
     }
+
 
     #region IPUnObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            Debug.Log("Writing " + synchronizePosition + " " + synchronizeRotation);
-            if (this.synchronizePosition)
+            Debug.Log("Writing " + SynchronizePosition + " " + SynchronizeRotation);
+            if (this.SynchronizePosition)
             {
                 for (int i = 0; i < SynchronizedChildTransform.Count; i++)
                 {
                     stream.SendNext(SynchronizedChildTransform[i].localPosition);
                 }
             }
-            if (this.synchronizeRotation)
+            if (this.SynchronizeRotation)
             {
                 for (int i = 0; i < SynchronizedChildTransform.Count; i++)
                 {
@@ -58,7 +74,7 @@ public class PhotonTransformChilView : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-            if (this.synchronizeScale)
+            if (this.SynchronizeScale)
             {
                 for (int i = 0; i < SynchronizedChildTransform.Count; i++)
                 {
@@ -68,14 +84,14 @@ public class PhotonTransformChilView : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            if (this.synchronizePosition)
+            if (this.SynchronizePosition)
             {
                 for (int i = 0; i < SynchronizedChildTransform.Count; i++)
                 {
                     localPositionList[i] = (Vector3)stream.ReceiveNext();
                 }
             }
-            if (this.synchronizeRotation)
+            if (this.SynchronizeRotation)
             {
                 for (int i = 0; i < SynchronizedChildTransform.Count; i++)
                 {
@@ -83,7 +99,7 @@ public class PhotonTransformChilView : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
 
-            if (this.synchronizeScale)
+            if (this.SynchronizeScale)
             {
                 for (int i = 0; i < SynchronizedChildTransform.Count; i++)
                 {
@@ -93,5 +109,4 @@ public class PhotonTransformChilView : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
     #endregion
-
 }

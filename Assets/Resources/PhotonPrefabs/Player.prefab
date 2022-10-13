@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &4195004210398524053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7914435904641729404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b96acb3ee5f6d499d86a21b41f7530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SteamVRLeft: {fileID: 7914435904641915434}
+  SteamVRRight: {fileID: 7914435904641749004}
+  SteamVRCamera: {fileID: 7914570587532806784}
+  UserOtherLeftHandModel: {fileID: 100060, guid: 65d8eda911e0ba548a3674f65c43308b,
+    type: 3}
+  UserOtherRightHandModel: {fileID: 100060, guid: 641e9d2f5c6b4cb438161abef3be8300,
+    type: 3}
+--- !u!114 &4291051414890661352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7914435904641729404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!114 &7649594867132260634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20,46 +55,11 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 4291051414890661352}
-  - {fileID: 1299974667124614554}
+  - {fileID: 5636754623163457716}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4291051414890661352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7914435904641729404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 1
---- !u!114 &4195004210398524053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7914435904641729404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2b96acb3ee5f6d499d86a21b41f7530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SteamVRLeft: {fileID: 7914435904641915434}
-  SteamVRRight: {fileID: 7914435904641749004}
-  SteamVRCamera: {fileID: 7914570587532806784}
-  UserOtherLeftHandModel: {fileID: 100060, guid: 65d8eda911e0ba548a3674f65c43308b,
-    type: 3}
-  UserOtherRightHandModel: {fileID: 100060, guid: 641e9d2f5c6b4cb438161abef3be8300,
-    type: 3}
---- !u!114 &1299974667124614554
+--- !u!114 &5636754623163457716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,9 +71,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7b4bda65931ff428c817cec0d20018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  synchronizePosition: 0
-  synchronizeRotation: 0
-  synchronizeScale: 0
+  SynchronizePosition: 1
+  SynchronizeRotation: 1
+  SynchronizeScale: 0
   SynchronizedChildTransform: []
 --- !u!1 &8958881150099529221
 GameObject:

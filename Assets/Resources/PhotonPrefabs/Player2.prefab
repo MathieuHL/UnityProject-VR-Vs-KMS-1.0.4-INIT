@@ -1529,7 +1529,6 @@ MonoBehaviour:
   trackingOriginTransform: {fileID: 8958881151813793645}
   hmdTransforms:
   - {fileID: 8609473660382800356}
-  - {fileID: 0}
   hands:
   - {fileID: 8958881151806985591}
   - {fileID: 8958881151807034857}

@@ -6619,6 +6619,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jsonConfigFile: {fileID: 0}
   State: 0
+  gameSetting:
+    LifeNumber: 0
+    DelayShoot: 0
+    DelayTeleport: 0
+    ColorShotVirus: 
+    ColorShotKMS: 
+    NbContaminatedPlayerToVictory: 0
+    RadiusExplosion: 0
+    TimeToAreaContamination: 0
 --- !u!1001 &1553631512
 PrefabInstance:
   m_ObjectHideFlags: 0

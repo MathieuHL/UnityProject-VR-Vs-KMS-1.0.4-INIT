@@ -61,15 +61,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
             m_TurnAmount = Mathf.Atan2(move.x, move.z);
 
+			//Retrieve player ant camera direction
 			camForward = cam.transform.eulerAngles.y;
             playerForward = player.transform.eulerAngles.y;
 
+			//Get the shortest angle in degree to rotate the player to the camera
 			turnAngle = camForward - playerForward;
 			if (turnAngle > 180)
 				turnAngle -= 360;
 			else if (turnAngle < -180)
 				turnAngle += 360;
 
+			//Rotate the player to the camera only when he's not moving
 			if ( move.Equals(new Vector3(0,0,0)) )
 				m_TurnAmount = turnAngle / 45;
 

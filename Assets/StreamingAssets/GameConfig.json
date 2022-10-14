@@ -1,0 +1,10 @@
+{
+    "LifeNumber": 5,
+    "DelayShoot": 3,
+    "DelayTeleport": 2,
+    "ColorShotVirus": "Red",
+    "ColorShotKMS": "Green",
+    "NbContaminatedPlayerToVictory": 3,
+    "RadiusExplosion": 1,
+    "TimeToAreaContamination": 3
+}

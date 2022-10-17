@@ -8,11 +8,13 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class UserPhotonScript : MonoBehaviourPunCallbacks
 {
     public static GameObject UserMeInstance;
+    public List<GameObject> pills;
+    public Transform spawnPoint;
+    private float speed = 25f;
+    private float firingSpeed = 0.2f;
+    private float TimeBetweenBullet = 0f;
 
     public Material PlayerLocalMat;
-    /// <summary>
-    /// Represents the GameObject on which to change the color for the local player
-    /// </summary>
     public GameObject GameObjectLocalPlayerColor;
 
     /// <summary>
@@ -26,7 +28,6 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
         {
             Debug.LogFormat("Avatar UserMe created for userId {0}", photonView.ViewID);
             UserMeInstance = gameObject;
-
         }
     }
 
@@ -39,6 +40,15 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
         activateLocalPlayer();
     }
 
+    private void Update()
+    {
+        TimeBetweenBullet += Time.deltaTime;
+
+        if (Input.GetMouseButton(0) && TimeBetweenBullet > firingSpeed)
+        {
+            photonView.RPC("SpawnBullet", RpcTarget.AllViaServer);
+        }
+    }
     /// <summary>
     /// Get the GameObject of the CameraRig
     /// </summary>
@@ -92,5 +102,14 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
                 GameObjectLocalPlayerColor.GetComponent<Renderer>().material = PlayerLocalMat;
             }
         }
+    }
+
+    [PunRPC]
+    void SpawnBullet()
+    {
+        var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, goFreeLookCameraRig.transform.rotation);
+        tempBullet.GetComponent<Rigidbody>().velocity = goFreeLookCameraRig.transform.forward * speed;
+        tempBullet.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
+        TimeBetweenBullet = 0;
     }
 }

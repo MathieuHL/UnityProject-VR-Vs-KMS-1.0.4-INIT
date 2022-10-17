@@ -9,6 +9,7 @@ TagManager:
   - VRCam
   - VRPlayer
   - Teleporting
+  - contaminationArea
   layers:
   - Default
   - TransparentFX

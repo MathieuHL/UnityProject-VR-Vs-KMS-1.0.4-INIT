@@ -164,6 +164,7 @@ Transform:
   - {fileID: 1433100944206201163}
   - {fileID: 1433100945218160891}
   - {fileID: 1433100944939213576}
+  - {fileID: 592717420208269274}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -300,6 +301,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eacd9fd908ae884f9ffb99404432cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pills:
+  - {fileID: 4679596402905113506, guid: 909fe569f1499c34f9e07a17c96a0b54, type: 3}
+  - {fileID: 7427082373427624407, guid: bb9b62b73b5963f4f910e9a9780dd0ba, type: 3}
+  - {fileID: 1942827687252567255, guid: 52a197a4c8bb5b04db21413f5696619b, type: 3}
+  - {fileID: 347299659223316179, guid: 31535e9039c549d4f952e5921715233d, type: 3}
+  - {fileID: 3514861486642751915, guid: 8df62c3233bd5dc48b4ecc6c33b08d00, type: 3}
+  - {fileID: 2908901199180373168, guid: 37acb476dcc8bab459797488f0f90e32, type: 3}
+  spawnPoint: {fileID: 592717420208269274}
   PlayerLocalMat: {fileID: 2100000, guid: 04c94373b22b860408514118b039584e, type: 2}
   GameObjectLocalPlayerColor: {fileID: 1433100944206201162}
 --- !u!114 &4977305617343730500
@@ -2975,3 +2984,33 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.081615, y: -0.040415905, z: 0.00029075146}
     m_Extent: {x: 0.037738636, y: 0.060759716, z: 0.07119451}
   m_DirtyAABB: 0
+--- !u!1 &5253796237064791065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 592717420208269274}
+  m_Layer: 0
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &592717420208269274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253796237064791065}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 30, y: 1.19, z: -15.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1433100944655468556}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

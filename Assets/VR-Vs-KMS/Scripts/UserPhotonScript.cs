@@ -108,7 +108,7 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     void SpawnBullet()
     {
         var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, goFreeLookCameraRig.transform.rotation);
-        tempBullet.GetComponent<Rigidbody>().velocity = goFreeLookCameraRig.transform.forward * speed;
+        tempBullet.GetComponent<Rigidbody>().velocity = -goFreeLookCameraRig.transform.forward * speed;
         tempBullet.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
         TimeBetweenBullet = 0;
     }

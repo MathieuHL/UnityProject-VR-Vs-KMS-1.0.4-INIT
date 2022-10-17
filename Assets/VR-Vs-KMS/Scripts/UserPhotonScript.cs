@@ -108,7 +108,7 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void SpawnBullet()
+    void SpawnBullet(PhotonMessageInfo info)
     {
         var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, goFreeLookCameraRig.transform.rotation);
         tempBullet.GetComponent<Rigidbody>().velocity = -goFreeLookCameraRig.transform.forward * speed;

@@ -11,7 +11,7 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     public List<GameObject> pills;
     public Transform spawnPoint;
     private float speed = 25f;
-    private float firingSpeed = 0.2f;
+    private float firingSpeed = .5f;
     private float TimeBetweenBullet = 0f;
 
     public Material PlayerLocalMat;
@@ -21,6 +21,7 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     /// The FreeLookCameraRig GameObject to configure for the UserMe
     /// </summary>
     GameObject goFreeLookCameraRig = null;
+    GameObject mainCamera;
 
     void Awake()
     {
@@ -35,6 +36,7 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     void Start()
     {
         Debug.Log("isLocalPlayer:" + photonView.IsMine);
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         updateGoFreeLookCameraRig();
         followLocalPlayer();
         activateLocalPlayer();
@@ -45,9 +47,7 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
             return;
 
-        TimeBetweenBullet += Time.deltaTime;
-
-        if (Input.GetMouseButton(0) && TimeBetweenBullet > firingSpeed)
+        if (Input.GetMouseButton(0))
         {
             photonView.RPC("SpawnBullet", RpcTarget.AllViaServer);
         }
@@ -110,9 +110,15 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     [PunRPC]
     void SpawnBullet(PhotonMessageInfo info)
     {
-        var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, goFreeLookCameraRig.transform.rotation);
-        tempBullet.GetComponent<Rigidbody>().velocity = -goFreeLookCameraRig.transform.forward * speed;
-        tempBullet.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
-        TimeBetweenBullet = 0;
+        TimeBetweenBullet += Time.deltaTime;
+
+        if (TimeBetweenBullet > firingSpeed)
+        {
+            var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, mainCamera.transform.rotation);
+            tempBullet.GetComponent<Rigidbody>().velocity = mainCamera.transform.forward * speed;
+            tempBullet.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
+            TimeBetweenBullet = 0;
+        }
+        
     }
 }

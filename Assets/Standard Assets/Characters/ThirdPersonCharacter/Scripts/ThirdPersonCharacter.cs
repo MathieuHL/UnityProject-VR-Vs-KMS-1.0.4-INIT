@@ -30,6 +30,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
+		public GameObject cam;
+		public GameObject player;
+		private float camForward;
+		private float playerForward;
+		private float turnAngle;
 
 		void Start()
 		{
@@ -41,12 +46,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
+
+			cam = GameObject.FindGameObjectWithTag("freeLookCam");
 		}
 
 
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
-
 			// convert the world relative moveInput vector into a local-relative
 			// turn amount and forward amount required to head in the desired
 			// direction.
@@ -55,8 +61,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			CheckGroundStatus();
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
 			m_TurnAmount = Mathf.Atan2(move.x, move.z);
-			m_ForwardAmount = move.z;
 
+			//Retrieve player ant camera direction
+			camForward = cam.transform.eulerAngles.y + 180;
+			playerForward = player.transform.eulerAngles.y;
+
+			//Get the shortest angle in degree to rotate the player to the camera
+			turnAngle = camForward - playerForward;
+			if (turnAngle > 180)
+				turnAngle -= 360;
+			else if (turnAngle < -180)
+				turnAngle += 360;
+
+			//Rotate the player to the camera only when he's not moving
+			if (move.Equals(new Vector3(0, 0, 0)))
+				m_TurnAmount = turnAngle / 45;
+
+			m_ForwardAmount = move.z;
 			ApplyExtraTurnRotation();
 
 			// control and velocity handling is different when grounded and airborne:

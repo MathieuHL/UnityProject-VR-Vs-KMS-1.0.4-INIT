@@ -17,6 +17,7 @@ public class GunShooting : MonoBehaviour
     void Start()
     {
         spawnPoint = gameObject.transform.Find("BulletSpawnPoint");
+        cam = GameObject.FindGameObjectWithTag("freeLookCam");
     }
 
     // Update is called once per frame

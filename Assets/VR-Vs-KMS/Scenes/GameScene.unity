@@ -1873,6 +1873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 523146961}
+  - component: {fileID: 523146962}
   m_Layer: 8
   m_Name: TeleportArea6
   m_TagString: Untagged
@@ -1897,6 +1898,18 @@ Transform:
   m_Father: {fileID: 1136410508}
   m_RootOrder: 111
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &523146962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523146960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46e9004689951248ba85f73527b4076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &523926590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2529,6 +2542,7 @@ GameObject:
   - component: {fileID: 809786420}
   - component: {fileID: 809786419}
   - component: {fileID: 809786418}
+  - component: {fileID: 809786422}
   m_Layer: 8
   m_Name: TeleportArea5
   m_TagString: Untagged
@@ -2625,6 +2639,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809786416}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &809786422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809786416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46e9004689951248ba85f73527b4076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &812114028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3027,6 +3053,7 @@ GameObject:
   - component: {fileID: 908152432}
   - component: {fileID: 908152431}
   - component: {fileID: 908152430}
+  - component: {fileID: 908152434}
   m_Layer: 8
   m_Name: TeleportArea4
   m_TagString: Untagged
@@ -3123,6 +3150,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908152428}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &908152434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908152428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46e9004689951248ba85f73527b4076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &910517428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 416390, guid: c76d2d3504ddb4847940a815cad04644,
@@ -3344,6 +3383,7 @@ GameObject:
   - component: {fileID: 1042522357}
   - component: {fileID: 1042522356}
   - component: {fileID: 1042522355}
+  - component: {fileID: 1042522359}
   m_Layer: 8
   m_Name: TeleportArea1
   m_TagString: Untagged
@@ -3440,6 +3480,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042522353}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1042522359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042522353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46e9004689951248ba85f73527b4076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1054132357 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 414768, guid: 45b9a5b6a96ed4d0699b4faff594d8c4,
@@ -5573,6 +5625,7 @@ GameObject:
   - component: {fileID: 1526202916}
   - component: {fileID: 1526202915}
   - component: {fileID: 1526202914}
+  - component: {fileID: 1526202918}
   m_Layer: 8
   m_Name: TeleportArea3
   m_TagString: Untagged
@@ -5669,6 +5722,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526202912}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1526202918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526202912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46e9004689951248ba85f73527b4076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1529645008
 GameObject:
   m_ObjectHideFlags: 0
@@ -5912,6 +5977,7 @@ GameObject:
   - component: {fileID: 1609483994}
   - component: {fileID: 1609483993}
   - component: {fileID: 1609483992}
+  - component: {fileID: 1609483996}
   m_Layer: 8
   m_Name: TeleportArea2
   m_TagString: Untagged
@@ -6008,6 +6074,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609483990}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1609483996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609483990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46e9004689951248ba85f73527b4076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1611946597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6726,6 +6804,7 @@ GameObject:
   - component: {fileID: 1757008834}
   - component: {fileID: 1757008833}
   - component: {fileID: 1757008832}
+  - component: {fileID: 1757008836}
   m_Layer: 8
   m_Name: TeleportArea7
   m_TagString: Untagged
@@ -6822,6 +6901,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757008830}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1757008836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757008830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46e9004689951248ba85f73527b4076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1771241360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 416390, guid: c76d2d3504ddb4847940a815cad04644,
@@ -8666,20 +8757,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5290371634470740056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 5290371634470740059}
-  sceneViewId: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &5290371634470740059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8802,3 +8886,27 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactable: {fileID: 0}
+--- !u!114 &5290371634470740062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5290371634470740056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 2
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 5290371634470740059}
+  - {fileID: 5290371634470740058}
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

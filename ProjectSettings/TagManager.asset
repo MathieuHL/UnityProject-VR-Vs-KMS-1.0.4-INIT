@@ -7,6 +7,8 @@ TagManager:
   - freeLookCam
   - ethanHips
   - VRCam
+  - VRPlayer
+  - Teleporting
   layers:
   - Default
   - TransparentFX

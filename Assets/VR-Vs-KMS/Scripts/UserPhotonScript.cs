@@ -42,6 +42,9 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+        if (!photonView.IsMine)
+            return;
+
         TimeBetweenBullet += Time.deltaTime;
 
         if (Input.GetMouseButton(0) && TimeBetweenBullet > firingSpeed)

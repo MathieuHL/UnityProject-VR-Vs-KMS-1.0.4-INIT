@@ -32,7 +32,7 @@ public class VR_CameraRigMultiuser : MonoBehaviourPunCallbacks
         try
         {
             // Get the Camera to set as the follow camera
-            goFreeLookCameraRig = GameObject.FindGameObjectWithTag("VRCam");
+            goFreeLookCameraRig = GameObject.FindGameObjectWithTag("freeLookCam");
             goFreeLookCameraRig.SetActive(false);
             // Deactivate the FreeLookCameraRig since we are using the SteamVR camera
             //...
@@ -55,15 +55,15 @@ public class VR_CameraRigMultiuser : MonoBehaviourPunCallbacks
         SteamVRLeft.GetComponent<SteamVR_Behaviour_Pose>().enabled = photonView.IsMine;
 
         // Left SteamVR_RenderModel activation if UserMe, deactivation if UserOther
-        //SteamVRLeft.GetComponentInChildren<SteamVR_RenderModel>().enabled = photonView.IsMine;
-        //SteamVRLeft.transform.Find("Model").gameObject.SetActive(photonView.IsMine);
+        SteamVRLeft.GetComponentInChildren<SteamVR_RenderModel>().enabled = photonView.IsMine;
+        SteamVRLeft.transform.Find("Model").gameObject.SetActive(photonView.IsMine);
 
         // Right activation if UserMe, deactivation if UserOther
         SteamVRRight.GetComponent<SteamVR_Behaviour_Pose>().enabled = photonView.IsMine;
 
         // Left SteamVR_RenderModel activation if UserMe, deactivation if UserOther
-        //SteamVRRight.GetComponentInChildren<SteamVR_RenderModel>().enabled = photonView.IsMine;
-       // SteamVRRight.transform.Find("Model").gameObject.SetActive(photonView.IsMine);
+        SteamVRRight.GetComponentInChildren<SteamVR_RenderModel>().enabled = photonView.IsMine;
+        SteamVRRight.transform.Find("Model").gameObject.SetActive(photonView.IsMine);
 
         // Camera activation if UserMe, deactivation if UserOther
         SteamVRCamera.GetComponent<Camera>().enabled = photonView.IsMine;

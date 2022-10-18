@@ -11,6 +11,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     public GameObject ballPrefab, shieldGO;
     public int maxHealth = 1, currentHealth;
     public TMP_Text healthText, currentHealthText;
+    public GameObject canvas;
 
     private void Start()
     {
@@ -46,10 +47,13 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
         if (!photonView.IsMine) return;
         Debug.Log("Got me and health = " + currentHealth);
 
-        // Manage to leave room as UserMe
-        if (--currentHealth <= 0)
+        --currentHealth;
+
+        if (currentHealth <= 0)
         {
-            PhotonNetwork.LeaveRoom();
+            gameObject.transform.position = new Vector3(200, 200, 200);
+            canvas.SetActive(true);
+            StartCoroutine(Respawn());
         }
     }
 
@@ -71,5 +75,14 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     void ChangeShieldState(PhotonMessageInfo info)
     {
         shieldGO.SetActive(!shieldGO.activeSelf);
+    }
+
+    public IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(5f);
+
+        transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
+        currentHealth = maxHealth;
+        canvas.SetActive(false);
     }
 }

@@ -20,7 +20,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     private float TimeBetweenBullet = 0f;
 
     public Material PlayerLocalMat;
-    public GameObject GameObjectLocalPlayerColor;
+    public GameObject GameObjectLocalPlayerColor, deathScreen;
 
     private RaycastHit hit;
 
@@ -129,10 +129,13 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         Debug.Log("Got me and health = " + currentHealth);
 
         // Manage to leave room as UserMe
-        if (--currentHealth <= 0)
+
+        --currentHealth;
+
+        if (currentHealth <= 0)
         {
             gameObject.transform.position = new Vector3(200, 200, 200);
-
+            deathScreen.SetActive(true);
             StartCoroutine(Respawn());
         }
     }
@@ -169,5 +172,6 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
 
         transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
         currentHealth = maxHealth;
+        deathScreen.SetActive(false);
     }
 }

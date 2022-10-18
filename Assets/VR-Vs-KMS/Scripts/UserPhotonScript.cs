@@ -10,12 +10,14 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     public static GameObject UserMeInstance;
     public List<GameObject> pills;
     public Transform spawnPoint;
-    private float speed = 25f;
+    private float speed = 5f;
     private float firingSpeed = .5f;
     private float TimeBetweenBullet = 0f;
 
     public Material PlayerLocalMat;
     public GameObject GameObjectLocalPlayerColor;
+
+    private RaycastHit hit;
 
     /// <summary>
     /// The FreeLookCameraRig GameObject to configure for the UserMe
@@ -114,8 +116,21 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
 
         if (TimeBetweenBullet > firingSpeed)
         {
+            //Projectile initialisation
             var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, mainCamera.transform.rotation);
-            tempBullet.GetComponent<Rigidbody>().velocity = mainCamera.transform.forward * speed;
+
+            //Shoot from the player to the RaycastHit from the camera
+            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            {
+                Vector3 shootingDirection = hit.point - spawnPoint.position;
+                tempBullet.GetComponent<Rigidbody>().velocity = shootingDirection * speed;
+            }
+            else
+            {
+                tempBullet.GetComponent<Rigidbody>().velocity = mainCamera.transform.forward * speed;
+            }
+
+            //Add some rotation to the projectile
             tempBullet.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
             TimeBetweenBullet = 0;
         }

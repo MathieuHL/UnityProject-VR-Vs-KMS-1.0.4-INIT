@@ -19,8 +19,10 @@ public class BulletLife : MonoBehaviour
         //gameObject.transform.position += new Vector3(0, -(gravity * Time.deltaTime), 0);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        //TODO: Retirer les points de vie du virus
+        //TODO: verify to not be: contaminationZone
+        if(collider.name != "PhotonPlayer(Clone)")
+            Destroy(gameObject);
     }
 }

@@ -1298,11 +1298,11 @@ GameObject:
   - component: {fileID: 8958881151808090275}
   m_Layer: 0
   m_Name: VRCamera
-  m_TagString: VRCam
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8958881151813807997
 Transform:
   m_ObjectHideFlags: 0
@@ -1605,7 +1605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftHand: {fileID: 8607728332551317772}
-  rightHand: {fileID: 5198416462555166019}
+  rightHand: {fileID: 8958881151813683765}
   ballPrefab: {fileID: 438751057920142150, guid: b9bf49648a7f93e4d88a1dd94c9367eb,
     type: 3}
   shieldGO: {fileID: 2216797353062885733}

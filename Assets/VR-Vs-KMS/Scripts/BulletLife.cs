@@ -19,7 +19,7 @@ public class BulletLife : MonoBehaviour
             Destroy(gameObject);
 
         var hit = collider.gameObject;
-        Debug.Log(hit.name);
+        Debug.Log("Le NOOOOOOOOOOM " + hit.name);
 
         VRPlayerScript vrPlayer = hit.GetComponent<VRPlayerScript>();
         if (vrPlayer != null)

@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityStandardAssets.Cameras;
 using UnityStandardAssets.Characters.ThirdPerson;
@@ -14,6 +15,8 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
 	
     public int maxHealth = 1, currentHealth;
     public TMP_Text healthText, currentHealthText;
+
+    private float speed = 25f;
     private float firingSpeed = .5f;
     private float TimeBetweenBullet = 0f;
 
@@ -45,6 +48,10 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
 
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
         currentHealth = maxHealth;
+
+        Debug.Log("currentHealt = " + currentHealth);
+        Debug.Log("max Health = " + maxHealth);
+
         updateGoFreeLookCameraRig();
         followLocalPlayer();
         activateLocalPlayer();

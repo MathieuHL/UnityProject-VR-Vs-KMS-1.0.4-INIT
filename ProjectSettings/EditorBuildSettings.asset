@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/VR-Vs-KMS/Scenes/InitScene.unity
+    path: Assets/VR-Vs-KMS/Scripts/Scenes/InitScene.unity
     guid: b0efe1f34841bc54d8dc0d19f5641e16
   - enabled: 1
-    path: Assets/VR-Vs-KMS/Scenes/GameScene.unity
+    path: Assets/VR-Vs-KMS/Scripts/Scenes/GameScene.unity
     guid: 30347d40228ce1a4888f1f7c7e1cd1f6
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 42bb17329c319fd41a059ae6e1fb76e2,

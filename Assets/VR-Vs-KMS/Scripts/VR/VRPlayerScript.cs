@@ -41,6 +41,18 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
         }
     }
 
+    public void HitByBall()
+    {
+        if (!photonView.IsMine) return;
+        Debug.Log("Got me and health = " + currentHealth);
+
+        // Manage to leave room as UserMe
+        if (--currentHealth <= 0)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+    }
+
     [PunRPC]
     void ThrowBall(PhotonMessageInfo info)
     {

@@ -13,16 +13,20 @@ public class BulletLife : MonoBehaviour
         Destroy(gameObject, 3);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        //gameObject.transform.position += new Vector3(0, -(gravity * Time.deltaTime), 0);
-    }
-
-    void OnTriggerEnter(Collider collider)
-    {
-        //TODO: verify to not be: contaminationZone
-        if(collider.name != "PhotonPlayer(Clone)")
+        if (collision.gameObject.name != "PhotonPlayer(Clone)")
             Destroy(gameObject);
+
+        var hit = collision.gameObject;
+        Debug.Log("Snowball hit something:" + hit);
+
+        VRPlayerScript vrPlayer = hit.GetComponent<VRPlayerScript>();
+        if (vrPlayer != null)
+        {
+            Debug.Log("It is a player !!");
+            vrPlayer.HitByBall();
+        }
+        Destroy(gameObject);
     }
 }

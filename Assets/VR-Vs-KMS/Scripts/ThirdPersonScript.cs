@@ -6,17 +6,16 @@ using UnityEngine;
 using UnityStandardAssets.Cameras;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class UserPhotonScript : MonoBehaviourPunCallbacks
+public class ThirdPersonScript : MonoBehaviourPunCallbacks
 {
     public static GameObject UserMeInstance;
     public List<GameObject> pills;
     public Transform spawnPoint;
-    private float speed = 5f;
 	
     public int maxHealth = 1, currentHealth;
     public TMP_Text healthText, currentHealthText;
 
-    private float speed = 25f;
+    private float speed = 5f;
     private float firingSpeed = .5f;
     private float TimeBetweenBullet = 0f;
 
@@ -36,6 +35,7 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             Debug.LogFormat("Avatar UserMe created for userId {0}", photonView.ViewID);
+            
             UserMeInstance = gameObject;
         }
     }
@@ -44,7 +44,6 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     void Start()
     {
         Debug.Log("isLocalPlayer:" + photonView.IsMine);
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
         currentHealth = maxHealth;
@@ -77,6 +76,8 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
         try
         {
             goFreeLookCameraRig = GameObject.FindGameObjectWithTag("freeLookCam");
+            mainCamera = goFreeLookCameraRig.transform.Find("Pivot").Find("MainCamera").gameObject;
+            Debug.Log("Main camera = " + mainCamera);
         }
         catch (System.Exception ex)
         {
@@ -122,25 +123,36 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
         }
     }
 
+    public void HitByBall()
+    {
+        if (!photonView.IsMine) return;
+        Debug.Log("Got me and health = " + currentHealth);
+
+        // Manage to leave room as UserMe
+        if (--currentHealth <= 0)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+    }
+
     [PunRPC]
     void SpawnBullet(PhotonMessageInfo info)
     {
         TimeBetweenBullet += Time.deltaTime;
-
         if (TimeBetweenBullet > firingSpeed)
         {
             //Projectile initialisation
-            var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, mainCamera.transform.rotation);
+            var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, spawnPoint.transform.rotation);
 
             //Shoot from the player to the RaycastHit from the camera
-            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            if (Physics.Raycast(spawnPoint.position, spawnPoint.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
             {
                 Vector3 shootingDirection = hit.point - spawnPoint.position;
                 tempBullet.GetComponent<Rigidbody>().velocity = shootingDirection * speed;
             }
             else
             {
-                tempBullet.GetComponent<Rigidbody>().velocity = mainCamera.transform.forward * speed;
+                tempBullet.GetComponent<Rigidbody>().velocity = spawnPoint.transform.forward * speed;
             }
 
             //Add some rotation to the projectile

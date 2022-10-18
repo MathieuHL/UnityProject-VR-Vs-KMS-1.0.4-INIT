@@ -78,26 +78,39 @@ namespace vr_vs_kms
         void Update()
         {
             //get time in zone and change zone color after 5s
-            if(playerInZone == true)
+            if(playerInZone && !virusInZone)
             {
                 inTimer += Time.deltaTime;
                 if(inTimer >= 5f)
                     BelongsToScientists();
+            }else if(!playerInZone && virusInZone)
+            {
+                inTimer -= Time.deltaTime;
+                if (inTimer >= 5f)
+                    BelongsToVirus();
             }else inTimer = 0f;
         }
 
         //Verify if a player enter the zone
         void OnTriggerEnter(Collider collider)
         {
-            if (collider.gameObject.name == "PhotonPlayer(Clone)")
+            if (collider.gameObject.tag == "Player")
                 playerInZone = true;
+            if (collider.gameObject.tag == "VRPlayer")
+                virusInZone = true;
+
         }
 
         //Verify if a player exit the zone
         void OnTriggerExit(Collider collider)
         {
-            if (collider.gameObject.name == "PhotonPlayer(Clone)")
+            if (collider.gameObject.tag == "Player")
+            {
                 playerInZone = false;
+            }
+                
+            if (collider.gameObject.tag == "VRPlayer")
+                virusInZone = false;
         }
 
         private void ColorParticle(ParticleSystem pSys, Color mainColor, Color accentColor)

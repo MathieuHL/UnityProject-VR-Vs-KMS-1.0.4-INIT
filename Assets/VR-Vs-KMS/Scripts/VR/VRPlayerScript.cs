@@ -58,11 +58,11 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     {
         float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
 
-        var shot = Instantiate(ballPrefab, rightHand.position, rightHand.rotation);
+        var shot = Instantiate(ballPrefab, spawnPoint.position, spawnPoint.rotation);
         shot.transform.localPosition = new Vector3(0, 0, 0);
 
         var shotRb = shot.GetComponent<Rigidbody>();
-        shotRb.velocity = (-rightHand.up + rightHand.forward) * 25f;
+        shotRb.velocity = (-spawnPoint.up + spawnPoint.forward) * 25f;
 
         Destroy(shot, 5.0f);
     }

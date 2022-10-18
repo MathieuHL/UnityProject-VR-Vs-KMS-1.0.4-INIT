@@ -15,7 +15,7 @@ public class BulletLife : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.name != "PhotonPlayer(Clone)")
+        if (collider.gameObject.tag != "Player")
             Destroy(gameObject);
 
         var hit = collider.gameObject;

@@ -12,7 +12,7 @@ public class VirusBulletScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.name != "Player2")
+        if (collider.gameObject.tag != "VRPlayer")
             Destroy(gameObject);
 
         var hit = collider.gameObject;

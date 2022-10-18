@@ -10,6 +10,7 @@ TagManager:
   - VRPlayer
   - Teleporting
   - contaminationArea
+  - SpawnPoints
   layers:
   - Default
   - TransparentFX

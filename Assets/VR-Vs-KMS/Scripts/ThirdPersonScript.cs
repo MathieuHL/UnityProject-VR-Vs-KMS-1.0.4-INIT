@@ -131,7 +131,9 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         // Manage to leave room as UserMe
         if (--currentHealth <= 0)
         {
-            PhotonNetwork.LeaveRoom();
+            gameObject.transform.position = new Vector3(200, 200, 200);
+
+            StartCoroutine(Respawn());
         }
     }
 
@@ -159,6 +161,13 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
             tempBullet.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
             TimeBetweenBullet = 0;
         }
-        
+    }
+
+    public IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(5f);
+
+        transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
+        currentHealth = maxHealth;
     }
 }

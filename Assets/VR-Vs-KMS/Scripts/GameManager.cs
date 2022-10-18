@@ -10,12 +10,15 @@ public class GameManager : MonoBehaviour
     public TextAsset jsonConfigFile;
     public GameState State;
     public JsonStructure gameSetting;
+    public GameObject[] spawnPoints;
 
     public static event Action<GameState> OnGameStateChanged;
 
     private void Awake()
     {
         Instance = this;
+
+        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoints");
 
         UpdateGameState(GameState.Select);
 

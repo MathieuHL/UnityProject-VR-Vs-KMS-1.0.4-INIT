@@ -20,6 +20,11 @@ public class NetworkController : MonoBehaviourPunCallbacks
         Debug.Log("prefab:" + UserDeviceManager.GetPrefabToSpawnWithDeviceUsed(pcPrefab, vrPrefab));
         #endregion
 
+        SpawnPlayer();
+    }
+
+    public void SpawnPlayer()
+    {
         GameObject playerPrefab = UserDeviceManager.GetPrefabToSpawnWithDeviceUsed(pcPrefab, vrPrefab);
 
         if (playerPrefab == null)
@@ -34,14 +39,13 @@ public class NetworkController : MonoBehaviourPunCallbacks
                 Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                 // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                 Vector3 initialPos = UserDeviceManager.GetDeviceUsed() == UserDeviceType.HTC ? new Vector3(0f, 0f, 0f) : new Vector3(0f, 5f, 0f);
-                PhotonNetwork.Instantiate("PhotonPrefabs/" + playerPrefab.name, initialPos, Quaternion.identity, 0);
+                PhotonNetwork.Instantiate("PhotonPrefabs/" + playerPrefab.name, GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position, Quaternion.identity, 0);
             }
             else
             {
                 Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
             }
         }
-        
     }
 
     public override void OnConnectedToMaster()

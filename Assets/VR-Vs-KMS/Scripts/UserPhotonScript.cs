@@ -11,6 +11,9 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     public List<GameObject> pills;
     public Transform spawnPoint;
     private float speed = 5f;
+	
+    public int maxHealth = 1, currentHealth;
+    public TMP_Text healthText, currentHealthText;
     private float firingSpeed = .5f;
     private float TimeBetweenBullet = 0f;
 
@@ -39,6 +42,9 @@ public class UserPhotonScript : MonoBehaviourPunCallbacks
     {
         Debug.Log("isLocalPlayer:" + photonView.IsMine);
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
+        maxHealth = GameManager.Instance.gameSetting.LifeNumber;
+        currentHealth = maxHealth;
         updateGoFreeLookCameraRig();
         followLocalPlayer();
         activateLocalPlayer();

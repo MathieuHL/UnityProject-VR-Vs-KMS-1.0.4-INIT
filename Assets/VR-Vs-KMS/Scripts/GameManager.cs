@@ -16,11 +16,15 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        UpdateGameState(GameState.Select);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Start()
     {
-        UpdateGameState(GameState.Select);
+        
     }
 
     public void UpdateGameState(GameState newState)
@@ -46,6 +50,7 @@ public class GameManager : MonoBehaviour
     public void SetGameSettings()
     {
         gameSetting = JsonUtility.FromJson<JsonStructure>(File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "GameConfig.json")));
+        Debug.Log("test");
     }
 
     public enum GameState {

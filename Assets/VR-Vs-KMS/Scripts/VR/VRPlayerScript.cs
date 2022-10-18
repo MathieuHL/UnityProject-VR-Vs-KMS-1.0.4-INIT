@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Valve.VR;
 
@@ -8,11 +9,15 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
 {
     public Transform leftHand, rightHand;
     public GameObject ballPrefab, shieldGO;
+    public int maxHealth = 1, currentHealth;
+    public TMP_Text healthText, currentHealthText;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        maxHealth = GameManager.Instance.gameSetting.LifeNumber;
+        currentHealth = maxHealth;
+        Debug.Log("currentHealt = " + currentHealth);
+        Debug.Log("max Health = " + maxHealth);
     }
 
     // Update is called once per frame

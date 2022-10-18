@@ -312,6 +312,10 @@ MonoBehaviour:
   - {fileID: 3514861486642751915, guid: 8df62c3233bd5dc48b4ecc6c33b08d00, type: 3}
   - {fileID: 2908901199180373168, guid: 37acb476dcc8bab459797488f0f90e32, type: 3}
   spawnPoint: {fileID: 592717420208269274}
+  maxHealth: 1
+  currentHealth: 0
+  healthText: {fileID: 0}
+  currentHealthText: {fileID: 0}
   PlayerLocalMat: {fileID: 2100000, guid: 04c94373b22b860408514118b039584e, type: 2}
   GameObjectLocalPlayerColor: {fileID: 1433100944206201162}
 --- !u!114 &4977305617343730500

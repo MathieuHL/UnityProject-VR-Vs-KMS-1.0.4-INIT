@@ -10,7 +10,7 @@ public class VirusBulletScript : MonoBehaviour
         Destroy(gameObject, 3);
     }
 
-    private void OnTrigerEnter(Collider collider)
+    private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.name != "Player2")
             Destroy(gameObject);

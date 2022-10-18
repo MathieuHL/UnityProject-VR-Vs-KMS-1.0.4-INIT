@@ -17,7 +17,6 @@ public class VirusBulletScript : MonoBehaviour
 
         var hit = collider.gameObject;
 
-        Debug.Log("La boule a touché");
         ThirdPersonScript tpsPlayer = hit.GetComponent<ThirdPersonScript>();
         if (tpsPlayer != null)
         {

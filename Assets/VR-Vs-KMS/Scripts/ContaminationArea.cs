@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 
 namespace vr_vs_kms
@@ -12,7 +14,7 @@ namespace vr_vs_kms
         {
             public Color mainColor;
             public Color secondColor;
-            
+
         }
 
         public BelongToProperties nobody;
@@ -28,6 +30,9 @@ namespace vr_vs_kms
         private int remainingGrenades;
         public float inTimer = 0f;
         private CullingGroup cullGroup;
+
+        private bool playerInZone = false;
+        private bool virusInZone = false;
 
         void Start()
         {
@@ -58,7 +63,7 @@ namespace vr_vs_kms
 
         void OnStateChanged(CullingGroupEvent cullEvent)
         {
-            Debug.Log($"cullEvent {cullEvent.isVisible}");
+            //Debug.Log($"cullEvent {cullEvent.isVisible}");
             if (cullEvent.isVisible)
             {
                 pSystem.Play(true);
@@ -69,20 +74,58 @@ namespace vr_vs_kms
             }
         }
 
-        void OnTriggerExit(Collider coll)
-        {
-            
-        }
 
         void Update()
         {
-            
+            //get time in zone and change zone color after 5s
+            if (playerInZone && !virusInZone)
+            {
+                inTimer += Time.deltaTime;
+                if (inTimer >= 5f)
+                    BelongsToScientists();
+            }
+            else if (!playerInZone && virusInZone)
+            {
+                inTimer -= Time.deltaTime;
+                if (inTimer >= 5f)
+                    BelongsToVirus();
+            }
+            else inTimer = 0f;
+        }
+
+        //Verify if a player enter the zone
+        void OnTriggerEnter(Collider collider)
+        {
+            if (collider.gameObject.tag == "Player")
+                playerInZone = true;
+            if (collider.gameObject.name == "VRPlayer")
+            {
+                virusInZone = true;
+                Debug.Log("hellooo");
+            }
+        }
+
+        //Verify if a player exit the zone
+        void OnTriggerExit(Collider collider)
+        {
+            if (collider.gameObject.tag == "Player")
+            {
+                playerInZone = false;
+            }
+
+            if (collider.gameObject.tag == "VRPlayer")
+                virusInZone = false;
         }
 
         private void ColorParticle(ParticleSystem pSys, Color mainColor, Color accentColor)
         {
             // TODO: Solution to color particle 
-            
+            //ParticleSystem.ColorOverLifetimeModule colors = new ParticleSystem.ColorOverLifetimeModule();
+            //colors.color.colorMin = mainColor;
+            //colors.color.colorMax = accentColor;
+            //pSys.colorOverLifetime = colors;
+
+            pSys.startColor = mainColor;
         }
 
         public void BelongsToNobody()

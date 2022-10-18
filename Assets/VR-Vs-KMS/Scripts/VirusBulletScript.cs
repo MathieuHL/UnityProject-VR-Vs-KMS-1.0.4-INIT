@@ -10,12 +10,12 @@ public class VirusBulletScript : MonoBehaviour
         Destroy(gameObject, 3);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTrigerEnter(Collider collider)
     {
-        if (collision.gameObject.name != "Player")
+        if (collider.gameObject.name != "Player")
             Destroy(gameObject);
 
-        var hit = collision.gameObject;
+        var hit = collider.gameObject;
 
         ThirdPersonScript tpsPlayer = hit.GetComponent<ThirdPersonScript>();
         if (tpsPlayer != null)

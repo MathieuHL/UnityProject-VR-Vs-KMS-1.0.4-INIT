@@ -7,7 +7,7 @@ using Valve.VR;
 
 public class VRPlayerScript : MonoBehaviourPunCallbacks
 {
-    public Transform leftHand, rightHand;
+    public Transform leftHand, rightHand, spawnPoint;
     public GameObject ballPrefab, shieldGO;
     public int maxHealth = 1, currentHealth;
     public TMP_Text healthText, currentHealthText;

@@ -13,13 +13,13 @@ public class BulletLife : MonoBehaviour
         Destroy(gameObject, 3);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject.name != "PhotonPlayer(Clone)")
+        if (collider.gameObject.name != "PhotonPlayer(Clone)")
             Destroy(gameObject);
 
-        var hit = collision.gameObject;
-        Debug.Log("Snowball hit something:" + hit);
+        var hit = collider.gameObject;
+        Debug.Log(hit.name);
 
         VRPlayerScript vrPlayer = hit.GetComponent<VRPlayerScript>();
         if (vrPlayer != null)

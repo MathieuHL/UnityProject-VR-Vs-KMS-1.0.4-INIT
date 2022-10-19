@@ -18,7 +18,7 @@ public class BulletLife : MonoBehaviour
         var hit = collider.gameObject;
         Debug.Log("Le NOOOOOOOOOOM " + hit.name);
 
-        VRPlayerScript vrPlayer = hit.GetComponent<VRPlayerScript>();
+        ThirdPersonScript vrPlayer = hit.GetComponent<ThirdPersonScript>();
         if (vrPlayer != null)
         {
             Debug.Log("It is a player !!");

@@ -314,8 +314,7 @@ MonoBehaviour:
   - {fileID: 2908901199180373168, guid: 37acb476dcc8bab459797488f0f90e32, type: 3}
   spawnPoint: {fileID: 592717420208269274}
   maxHealth: 1
-  healthText: {fileID: 0}
-  currentHealthText: {fileID: 0}
+  currentHealth: 0
   PlayerLocalMat: {fileID: 2100000, guid: 04c94373b22b860408514118b039584e, type: 2}
   GameObjectLocalPlayerColor: {fileID: 1433100944206201162}
   healthbar: {fileID: 814706128031654767}
@@ -3106,6 +3105,7 @@ GameObject:
   - component: {fileID: 726818823907392354}
   - component: {fileID: 5628441693647134240}
   - component: {fileID: 8617201077680512258}
+  - component: {fileID: 7555812217660404893}
   m_Layer: 0
   m_Name: Healthbar Canvas
   m_TagString: Untagged
@@ -3193,6 +3193,28 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7555812217660404893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827650927164196323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 2
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5071828849893219650
 GameObject:
   m_ObjectHideFlags: 0

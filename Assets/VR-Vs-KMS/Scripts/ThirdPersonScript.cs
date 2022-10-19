@@ -6,14 +6,14 @@ using UnityEngine;
 using UnityStandardAssets.Cameras;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class ThirdPersonScript : MonoBehaviourPunCallbacks
+public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
 {
     public static GameObject UserMeInstance;
     public List<GameObject> pills;
     public Transform spawnPoint;
 	
-    public int maxHealth = 5;
-    public TMP_Text healthText, currentHealthText;
+    public int maxHealth = 5, currentHealth;
+    private float previousHealth;
 
     private float speed = 5f;
     private float firingSpeed = .5f;
@@ -48,10 +48,8 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         Debug.Log("isLocalPlayer:" + photonView.IsMine);
 
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
+        currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
-
-        Debug.Log("currentHealt = " + healthbar.GetHealth());
-        Debug.Log("max Health = " + maxHealth);
 
         updateGoFreeLookCameraRig();
         followLocalPlayer();
@@ -173,5 +171,20 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
 
         transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
         healthbar.SetMaxHealth(maxHealth);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(healthbar.GetHealth());
+        }
+        else
+        {
+            healthbar.SetHealth((float)stream.ReceiveNext());
+        }
+
+        if (previousHealth != healthbar.GetHealth()) healthbar.SetHealth(healthbar.GetHealth() - 1);
+        previousHealth = healthbar.GetHealth();
     }
 }

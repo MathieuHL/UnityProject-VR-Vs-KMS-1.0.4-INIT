@@ -78,7 +78,8 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     [PunRPC]
     void ChangeShieldState(PhotonMessageInfo info)
     {
-        shieldGO.SetActive(!shieldGO.activeSelf);
+        if(shieldGO != null && !ShieldScript.isDestroyed)
+            shieldGO.SetActive(!shieldGO.activeSelf);
     }
 
     public IEnumerator Respawn()
@@ -88,6 +89,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
         transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
         currentHealth = maxHealth;
         canvas.SetActive(false);
+        ShieldScript.isDestroyed = false;
         GetComponent<AudioSource>().PlayOneShot(soundRespawn);
     }
 }

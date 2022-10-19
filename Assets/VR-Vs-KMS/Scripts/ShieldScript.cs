@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShieldScript : MonoBehaviour
 {
     int currentHealth = 5;
+    public static bool isDestroyed = false;
 
     public void HitByBall()
     {
@@ -12,7 +13,7 @@ public class ShieldScript : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            isDestroyed = true;
         }
     }
 }

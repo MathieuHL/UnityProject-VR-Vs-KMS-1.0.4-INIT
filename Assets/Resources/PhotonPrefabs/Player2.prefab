@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 9013146492478480967}
   - component: {fileID: 526207112749001096}
   - component: {fileID: 9005011125100846751}
-  - component: {fileID: 7433503512101871839}
   - component: {fileID: 4644709085397342717}
+  - component: {fileID: 5963543794603886708}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2216797353062885733}
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: -0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8607728332551317772}
@@ -152,20 +152,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!64 &7433503512101871839
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2216797353062885733}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1272481795433867914, guid: ccb128f9c280bdd489355b268e636da1, type: 3}
 --- !u!114 &4644709085397342717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +164,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dedd6c4989f4404a8079e82d919c842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &5963543794603886708
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2216797353062885733}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.101996504, z: 2}
+  m_Center: {x: -0.000000059604645, y: 0.04305033, z: 0}
 --- !u!1 &2249667642873417979
 GameObject:
   m_ObjectHideFlags: 0

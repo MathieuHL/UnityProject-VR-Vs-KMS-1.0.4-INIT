@@ -15,6 +15,7 @@ public class ShieldScript : MonoBehaviour
         {
             Debug.Log(currentHealth + "vie shield");
             isDestroyed = true;
+            gameObject.SetActive(false);
         }
     }
 }

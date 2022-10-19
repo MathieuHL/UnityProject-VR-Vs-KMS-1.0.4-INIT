@@ -78,8 +78,10 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     [PunRPC]
     void ChangeShieldState(PhotonMessageInfo info)
     {
-        if(shieldGO != null && !ShieldScript.isDestroyed)
+        if(!ShieldScript.isDestroyed)
             shieldGO.SetActive(!shieldGO.activeSelf);
+
+        Debug.Log(ShieldScript.isDestroyed + "etat shield");
     }
 
     public IEnumerator Respawn()

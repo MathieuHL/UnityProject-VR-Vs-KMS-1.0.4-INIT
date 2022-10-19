@@ -13,6 +13,7 @@ public class ShieldScript : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            Debug.Log(currentHealth + "vie shield");
             isDestroyed = true;
         }
     }

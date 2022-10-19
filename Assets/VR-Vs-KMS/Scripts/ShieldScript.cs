@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShieldScript : MonoBehaviour
 {
-    int currentHealth = 5;
+    public static int currentHealth = 5;
     public static bool isDestroyed = false;
 
     public void HitByBall()

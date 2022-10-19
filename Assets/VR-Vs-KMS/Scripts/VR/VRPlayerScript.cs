@@ -92,6 +92,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
         currentHealth = maxHealth;
         canvas.SetActive(false);
         ShieldScript.isDestroyed = false;
+        ShieldScript.currentHealth = 5;
         GetComponent<AudioSource>().PlayOneShot(soundRespawn);
     }
 }

@@ -27,6 +27,13 @@ public class BulletLife : MonoBehaviour
             Debug.Log("It is a player !!");
             vrPlayer.HitByBall();
         }
+
+        ShieldScript shieldScript = hit.GetComponent<ShieldScript>();
+        if (shieldScript != null)
+        {
+            Debug.Log("It is a player !!");
+            shieldScript.HitByBall();
+        }
         Destroy(gameObject);
     }
 }

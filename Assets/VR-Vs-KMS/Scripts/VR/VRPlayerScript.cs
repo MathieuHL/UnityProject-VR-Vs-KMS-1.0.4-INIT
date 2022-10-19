@@ -12,6 +12,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     public int maxHealth = 1, currentHealth;
     public TMP_Text healthText, currentHealthText;
     public GameObject canvas;
+    public AudioClip soundFire, soundHit, soundDead, soundRespawn;
 
     private void Start()
     {
@@ -48,11 +49,13 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
         Debug.Log("Got me and health = " + currentHealth);
 
         --currentHealth;
+        GetComponent<AudioSource>().PlayOneShot(soundHit);
 
         if (currentHealth <= 0)
         {
             gameObject.transform.position = new Vector3(200, 200, 200);
             canvas.SetActive(true);
+            GetComponent<AudioSource>().PlayOneShot(soundRespawn);
             StartCoroutine(Respawn());
         }
     }
@@ -63,6 +66,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
         float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
 
         var shot = Instantiate(ballPrefab, spawnPoint.position, spawnPoint.rotation);
+        GetComponent<AudioSource>().PlayOneShot(soundFire);
 
         shot.GetComponent<Rigidbody>().velocity = (-spawnPoint.up + spawnPoint.forward) * 25f;
 
@@ -84,5 +88,6 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
         transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
         currentHealth = maxHealth;
         canvas.SetActive(false);
+        GetComponent<AudioSource>().PlayOneShot(soundRespawn);
     }
 }

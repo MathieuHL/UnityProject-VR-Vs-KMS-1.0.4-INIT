@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &834503829020523127
 RectTransform:
   m_ObjectHideFlags: 0
@@ -394,6 +394,10 @@ MonoBehaviour:
   PlayerLocalMat: {fileID: 2100000, guid: 04c94373b22b860408514118b039584e, type: 2}
   GameObjectLocalPlayerColor: {fileID: 1433100944206201162}
   deathScreen: {fileID: 178800151483654068}
+  soundFire: {fileID: 8300000, guid: 8bec2ea7f94d4a74b9ba4e110ff85df1, type: 3}
+  soundHit: {fileID: 8300000, guid: 7a4d375f2b6f77f43825cd330828c75a, type: 3}
+  soundDead: {fileID: 8300000, guid: a58f69eee785fe945b13fb34ba4e9710, type: 3}
+  soundRespawn: {fileID: 8300000, guid: 4be2575f076e80b4b8f1981264ce5ffd, type: 3}
 --- !u!114 &4977305617343730500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3186,7 +3190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2865091182883445874
 RectTransform:
   m_ObjectHideFlags: 0

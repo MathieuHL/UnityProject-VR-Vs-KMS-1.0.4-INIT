@@ -22,6 +22,8 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     public Material PlayerLocalMat;
     public GameObject GameObjectLocalPlayerColor, deathScreen;
 
+    public AudioClip soundFire, soundHit, soundDead, soundRespawn;
+
     private RaycastHit hit;
 
     /// <summary>
@@ -131,11 +133,13 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         // Manage to leave room as UserMe
 
         --currentHealth;
+        GetComponent<AudioSource>().PlayOneShot(soundHit);
 
         if (currentHealth <= 0)
         {
             gameObject.transform.position = new Vector3(200, 200, 200);
             deathScreen.SetActive(true);
+            GetComponent<AudioSource>().PlayOneShot(soundDead);
             StartCoroutine(Respawn());
         }
     }
@@ -148,6 +152,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         {
             //Projectile initialisation
             var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, spawnPoint.transform.rotation);
+            GetComponent<AudioSource>().PlayOneShot(soundFire);
 
             //Shoot from the player to the RaycastHit from the camera
             if (Physics.Raycast(spawnPoint.position, spawnPoint.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
@@ -173,5 +178,6 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
         currentHealth = maxHealth;
         deathScreen.SetActive(false);
+        GetComponent<AudioSource>().PlayOneShot(soundRespawn);
     }
 }

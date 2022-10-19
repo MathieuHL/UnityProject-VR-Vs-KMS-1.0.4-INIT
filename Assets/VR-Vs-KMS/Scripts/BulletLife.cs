@@ -19,12 +19,10 @@ public class BulletLife : MonoBehaviour
             Destroy(gameObject);
 
         var hit = collider.gameObject;
-        Debug.Log("Le NOOOOOOOOOOM " + hit.name);
 
         VRPlayerScript vrPlayer = hit.GetComponent<VRPlayerScript>();
         if (vrPlayer != null)
         {
-            Debug.Log("It is a player !!");
             vrPlayer.HitByBall();
             Destroy(gameObject);
         }
@@ -32,10 +30,12 @@ public class BulletLife : MonoBehaviour
         ShieldScript shieldScript = hit.GetComponent<ShieldScript>();
         if (shieldScript != null)
         {
-            Debug.Log("It is a player !!");
+            Debug.Log("It is a ashield !!");
             shieldScript.HitByBall();
             Destroy(gameObject);
         }
-        Debug.Log(collider.tag);
+        if (hit.name == "Shield")
+            Destroy(gameObject);
+        Debug.Log("los tag + " + collider.tag);
     }
 }

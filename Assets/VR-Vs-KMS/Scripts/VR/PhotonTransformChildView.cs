@@ -52,13 +52,11 @@ public class PhotonTransformChildView : MonoBehaviourPunCallbacks, IPunObservabl
         }
     }
 
-
     #region IPUnObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            Debug.Log("Writing " + SynchronizePosition + " " + SynchronizeRotation);
             if (this.SynchronizePosition)
             {
                 for (int i = 0; i < SynchronizedChildTransform.Count; i++)

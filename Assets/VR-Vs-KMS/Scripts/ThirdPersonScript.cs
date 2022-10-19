@@ -12,7 +12,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     public List<GameObject> pills;
     public Transform spawnPoint;
 	
-    public int maxHealth = 1, currentHealth;
+    public int maxHealth = 5;
     public TMP_Text healthText, currentHealthText;
 
     private float speed = 5f;
@@ -23,6 +23,8 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     public GameObject GameObjectLocalPlayerColor;
 
     private RaycastHit hit;
+
+    public HealthbarBehaviour healthbar;
 
     /// <summary>
     /// The FreeLookCameraRig GameObject to configure for the UserMe
@@ -46,9 +48,9 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         Debug.Log("isLocalPlayer:" + photonView.IsMine);
 
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
-        currentHealth = maxHealth;
+        healthbar.SetMaxHealth(maxHealth);
 
-        Debug.Log("currentHealt = " + currentHealth);
+        Debug.Log("currentHealt = " + healthbar.GetHealth());
         Debug.Log("max Health = " + maxHealth);
 
         updateGoFreeLookCameraRig();
@@ -126,10 +128,11 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     public void HitByBall()
     {
         if (!photonView.IsMine) return;
-        Debug.Log("Got me and health = " + currentHealth);
-
+        Debug.Log("Got me and health = " + healthbar.GetHealth());
+        
+        healthbar.SetHealth(healthbar.GetHealth() - 1);
         // Manage to leave room as UserMe
-        if (--currentHealth <= 0)
+        if (healthbar.GetHealth() <= 0)
         {
             gameObject.transform.position = new Vector3(200, 200, 200);
 
@@ -168,6 +171,6 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(5f);
 
         transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
-        currentHealth = maxHealth;
+        healthbar.SetMaxHealth(maxHealth);
     }
 }

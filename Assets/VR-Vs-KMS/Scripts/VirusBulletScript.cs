@@ -12,9 +12,6 @@ public class VirusBulletScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag != "VRPlayer")
-            Destroy(gameObject);
-
         var hit = collider.gameObject;
 
         ThirdPersonScript tpsPlayer = hit.GetComponent<ThirdPersonScript>();
@@ -23,6 +20,6 @@ public class VirusBulletScript : MonoBehaviour
             Debug.Log("It is a player !!");
             tpsPlayer.HitByBall();
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

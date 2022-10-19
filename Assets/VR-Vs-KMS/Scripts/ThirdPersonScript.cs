@@ -155,14 +155,14 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
             GetComponent<AudioSource>().PlayOneShot(soundFire);
 
             //Shoot from the player to the RaycastHit from the camera
-            if (Physics.Raycast(spawnPoint.position, spawnPoint.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
             {
                 Vector3 shootingDirection = hit.point - spawnPoint.position;
                 tempBullet.GetComponent<Rigidbody>().velocity = shootingDirection * speed;
             }
             else
             {
-                tempBullet.GetComponent<Rigidbody>().velocity = spawnPoint.transform.forward * speed;
+                tempBullet.GetComponent<Rigidbody>().velocity = mainCamera.transform.forward * speed;
             }
 
             //Add some rotation to the projectile

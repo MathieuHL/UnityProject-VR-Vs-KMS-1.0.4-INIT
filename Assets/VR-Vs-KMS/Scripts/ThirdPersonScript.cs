@@ -67,6 +67,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         {
             photonView.RPC("SpawnBullet", RpcTarget.AllViaServer);
         }
+        
     }
     /// <summary>
     /// Get the GameObject of the CameraRig

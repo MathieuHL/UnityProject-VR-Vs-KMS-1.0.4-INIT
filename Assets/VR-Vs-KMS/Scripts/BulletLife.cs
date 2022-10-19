@@ -15,9 +15,6 @@ public class BulletLife : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag != "Player")
-            Destroy(gameObject);
-
         var hit = collider.gameObject;
         Debug.Log("Le NOOOOOOOOOOM " + hit.name);
 

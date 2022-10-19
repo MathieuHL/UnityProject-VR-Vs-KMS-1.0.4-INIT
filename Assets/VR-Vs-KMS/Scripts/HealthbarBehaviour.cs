@@ -11,7 +11,7 @@ public class HealthbarBehaviour : MonoBehaviour
     /// Set max health and reset current health to the max value
     /// </summary>
     /// <param name="health"></param>
-    public void SetMaxHealth(int health)
+    public void SetMaxHealth(float health)
     {
         slider.maxValue = health;
         slider.value = health;
@@ -21,7 +21,7 @@ public class HealthbarBehaviour : MonoBehaviour
     /// Set current health
     /// </summary>
     /// <param name="health"></param>
-    public void SetHealth(int health)
+    public void SetHealth(float health)
     {
         slider.value = health;
     }
@@ -30,8 +30,8 @@ public class HealthbarBehaviour : MonoBehaviour
     /// Return current health
     /// </summary>
     /// <returns></returns>
-    public int GetHealth()
+    public float GetHealth()
     {
-        return (int)slider.value;
+        return slider.value;
     }
 }

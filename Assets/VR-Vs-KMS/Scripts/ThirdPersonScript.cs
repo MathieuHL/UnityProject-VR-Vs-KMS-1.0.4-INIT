@@ -20,7 +20,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     private float firingSpeed = .5f;
     private float TimeBetweenBullet = 0f;
 
-    public Slider slider;
+    public Slider slider, slider2;
     public GameObject deathScreen;
 
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
@@ -50,6 +50,8 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
         currentHealth = maxHealth;
         slider.maxValue = maxHealth;
         slider.value = currentHealth;
+        slider2.maxValue = maxHealth;
+        slider2.value = currentHealth;
 
         updateGoFreeLookCameraRig();
         followLocalPlayer();
@@ -184,6 +186,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     public void SetHealth()
     {
         slider.value = (float)currentHealth;
+        slider2.value = (float)currentHealth;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

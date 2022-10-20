@@ -9,13 +9,13 @@ using Valve.VR;
 public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Transform leftHand, rightHand, spawnPoint, shieldPosition;
-    public GameObject ballPrefab, shieldGO, shieldPrefab;
+    public GameObject ballPrefab, shieldGO, shieldPrefab, victoryGo, loseGo;
     public int maxHealth = 5, currentHealth;
     public GameObject canvas;
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
     public Slider slider, slider2;
 
-    private int previousHealth=1;
+    private int previousHealth;
 
     private void Start()
     {
@@ -64,6 +64,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
         if (currentHealth <= 0)
         {
+            GameManager.Instance.tpsScore++;
             gameObject.transform.position = new Vector3(200, 200, 200);
             canvas.SetActive(true);
             GetComponent<AudioSource>().PlayOneShot(soundRespawn);

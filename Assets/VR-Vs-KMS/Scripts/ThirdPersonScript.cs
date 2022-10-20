@@ -21,7 +21,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
     private float TimeBetweenBullet = 0f;
 
     public Slider slider;
-    public GameObject deathScreen;
+    public GameObject deathScreen, victoryGo, loseGo;
 
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
 
@@ -133,6 +133,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
 
         if (currentHealth <= 0)
         {
+            GameManager.Instance.vrScore++;
             gameObject.transform.position = new Vector3(200, 200, 200);
             deathScreen.SetActive(true);
             GetComponent<AudioSource>().PlayOneShot(soundDead);

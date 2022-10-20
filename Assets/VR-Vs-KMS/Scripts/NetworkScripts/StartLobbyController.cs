@@ -26,6 +26,7 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
         _quickCancelBtn.SetActive(true);
         PhotonNetwork.NickName = usernameIF.text;
         PhotonNetwork.JoinRandomRoom();
+        GameManager.Instance.UpdateGameState(GameManager.GameState.Playing);
         Debug.Log("QuickStart");
     }
 
@@ -40,7 +41,9 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
         Debug.Log("Creating room now");
         int randomRoomNumber = Random.Range(0, 10);
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)_roomSize };
-        PhotonNetwork.CreateRoom("Room " + randomRoomNumber, roomOps);
+        string roomName = "Room " + randomRoomNumber;
+        PhotonNetwork.CreateRoom(roomName, roomOps);
+        GameManager.Instance.roomName = roomName;
         Debug.Log("The room number is " + randomRoomNumber);
     }
 

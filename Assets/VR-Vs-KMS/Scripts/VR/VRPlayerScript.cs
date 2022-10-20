@@ -3,23 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Valve.VR;
 
 public class VRPlayerScript : MonoBehaviourPunCallbacks
 {
-    public Transform leftHand, rightHand, spawnPoint;
-    public GameObject ballPrefab, shieldGO;
+    public Transform leftHand, rightHand, spawnPoint, shieldPosition;
+    public GameObject ballPrefab, shieldGO, shieldPrefab;
     public int maxHealth = 1, currentHealth;
     public TMP_Text healthText, currentHealthText;
     public GameObject canvas;
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
+    public Slider slider;
+
+    private int previousHealth;
 
     private void Start()
     {
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
         currentHealth = maxHealth;
-        Debug.Log("currentHealt = " + currentHealth);
-        Debug.Log("max Health = " + maxHealth);
+        slider.maxValue = maxHealth;
+        slider.value = currentHealth;
+
+        shieldGO = Instantiate(shieldPrefab, shieldPosition);
+        shieldGO.SetActive(false);
     }
 
     // Update is called once per frame
@@ -49,6 +56,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
         Debug.Log("Got me and health = " + currentHealth);
 
         --currentHealth;
+        SetHealth();
         GetComponent<AudioSource>().PlayOneShot(soundHit);
 
         if (currentHealth <= 0)
@@ -78,10 +86,8 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     [PunRPC]
     void ChangeShieldState(PhotonMessageInfo info)
     {
-        if(!ShieldScript.isDestroyed)
+        if(shieldGO!=null)
             shieldGO.SetActive(!shieldGO.activeSelf);
-
-        Debug.Log(ShieldScript.isDestroyed + "etat shield");
     }
 
     public IEnumerator Respawn()
@@ -90,9 +96,30 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
 
         transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
         currentHealth = maxHealth;
+        SetHealth();
         canvas.SetActive(false);
-        ShieldScript.isDestroyed = false;
-        ShieldScript.currentHealth = 5;
         GetComponent<AudioSource>().PlayOneShot(soundRespawn);
+        shieldGO = Instantiate(shieldPrefab, shieldPosition);
+        shieldGO.SetActive(false);
+    }
+
+    public void SetHealth()
+    {
+        slider.value = (float)currentHealth;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth);
+        }
+        else
+        {
+            currentHealth = (int)stream.ReceiveNext();
+        }
+
+        if (previousHealth != currentHealth) SetHealth();
+        previousHealth = currentHealth;
     }
 }

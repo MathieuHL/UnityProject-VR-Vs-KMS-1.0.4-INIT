@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.Cameras;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -11,16 +12,16 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     public static GameObject UserMeInstance;
     public List<GameObject> pills;
     public Transform spawnPoint;
-	
-    public int maxHealth = 1, currentHealth;
-    public TMP_Text healthText, currentHealthText;
+
+    public int maxHealth = 5, currentHealth;
+    private float previousHealth;
 
     private float speed = 5f;
     private float firingSpeed = .5f;
     private float TimeBetweenBullet = 0f;
 
-    public Material PlayerLocalMat;
-    public GameObject GameObjectLocalPlayerColor, deathScreen;
+    public Slider slider;
+    public GameObject deathScreen;
 
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
 
@@ -45,13 +46,10 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("isLocalPlayer:" + photonView.IsMine);
-
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
         currentHealth = maxHealth;
-
-        Debug.Log("currentHealt = " + currentHealth);
-        Debug.Log("max Health = " + maxHealth);
+        slider.maxValue = maxHealth;
+        slider.value = currentHealth;
 
         updateGoFreeLookCameraRig();
         followLocalPlayer();
@@ -120,7 +118,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
             }
             catch (System.Exception)
             {
-                GameObjectLocalPlayerColor.GetComponent<Renderer>().material = PlayerLocalMat;
+                
             }
         }
     }
@@ -134,6 +132,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
 
         --currentHealth;
         GetComponent<AudioSource>().PlayOneShot(soundHit);
+        SetHealth();
 
         if (currentHealth <= 0)
         {
@@ -177,7 +176,28 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
 
         transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
         currentHealth = maxHealth;
+        SetHealth();
         deathScreen.SetActive(false);
         GetComponent<AudioSource>().PlayOneShot(soundRespawn);
+    }
+
+    public void SetHealth()
+    {
+        slider.value = (float)currentHealth;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth);
+        }
+        else
+        {
+            currentHealth = (int)stream.ReceiveNext();
+        }
+
+        if (previousHealth != currentHealth) SetHealth();
+        previousHealth = currentHealth;
     }
 }

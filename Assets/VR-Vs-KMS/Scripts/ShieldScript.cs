@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ShieldScript : MonoBehaviour
 {
-    public static int currentHealth = 5;
-    public static bool isDestroyed = false;
+    public int currentHealth = 5;
 
     public void HitByBall()
     {
@@ -14,8 +13,7 @@ public class ShieldScript : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log(currentHealth + "vie shield");
-            isDestroyed = true;
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

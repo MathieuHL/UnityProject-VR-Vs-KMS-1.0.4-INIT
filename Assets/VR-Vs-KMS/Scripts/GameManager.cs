@@ -72,12 +72,12 @@ public class GameManager : MonoBehaviour
 
             foreach (GameObject victoryPanel in listVictoryScreen)
             {
-                victoryPanel.SetActive(true);
+                //victoryPanel.SetActive(true);
             }
 
             foreach (GameObject losePanel in listLoseScreen)
             {
-                losePanel.SetActive(true);
+                //losePanel.SetActive(true);
             }
 
             StartCoroutine(CloseRoomNetwork());
@@ -92,12 +92,12 @@ public class GameManager : MonoBehaviour
 
             foreach (GameObject victoryPanel in listVictoryScreen)
             {
-                victoryPanel.SetActive(true);
+                //victoryPanel.SetActive(true);
             }
 
             foreach (GameObject losePanel in listLoseScreen)
             {
-                losePanel.SetActive(true);
+                //losePanel.SetActive(true);
             }
 
             StartCoroutine(CloseRoomNetwork());

@@ -64,7 +64,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
         if (currentHealth <= 0)
         {
-            GameManager.Instance.tpsScore++;
+            photonView.RPC("UpdateScore", RpcTarget.AllViaServer);
             gameObject.transform.position = new Vector3(200, 200, 200);
             canvas.SetActive(true);
             GetComponent<AudioSource>().PlayOneShot(soundRespawn);
@@ -107,6 +107,12 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         shieldGO.SetActive(false);
     }
 
+    [PunRPC]
+    void UpdateScore(PhotonMessageInfo infp)
+    {
+        GameManager.Instance.tpsScore++;
+    }
+
     public void SetHealth()
     {
         slider.value = (float)currentHealth;
@@ -118,12 +124,10 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(currentHealth);
-            stream.SendNext(GameManager.Instance.vrScore);
         }
         else
         {
             currentHealth = (int)stream.ReceiveNext();
-            GameManager.Instance.vrScore = (int)stream.ReceiveNext();
         }
 
         if (previousHealth != currentHealth) SetHealth();

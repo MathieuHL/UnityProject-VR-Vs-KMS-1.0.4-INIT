@@ -133,7 +133,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
 
         if (currentHealth <= 0)
         {
-            GameManager.Instance.vrScore++;
+            photonView.RPC("UpdateScore", RpcTarget.AllViaServer);
             gameObject.transform.position = new Vector3(200, 200, 200);
             deathScreen.SetActive(true);
             GetComponent<AudioSource>().PlayOneShot(soundDead);
@@ -166,6 +166,12 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
             tempBullet.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
             TimeBetweenBullet = 0;
         }
+    }
+
+    [PunRPC]
+    void UpdateScore(PhotonMessageInfo infp)
+    {
+        GameManager.Instance.vrScore++;
     }
 
     public IEnumerator Respawn()

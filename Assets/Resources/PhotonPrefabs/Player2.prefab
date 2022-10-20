@@ -2415,8 +2415,6 @@ MonoBehaviour:
     type: 3}
   maxHealth: 5
   currentHealth: 0
-  healthText: {fileID: 0}
-  currentHealthText: {fileID: 0}
   canvas: {fileID: 3076714542247611082}
   soundFire: {fileID: 8300000, guid: 8bec2ea7f94d4a74b9ba4e110ff85df1, type: 3}
   soundHit: {fileID: 8300000, guid: 7a4d375f2b6f77f43825cd330828c75a, type: 3}

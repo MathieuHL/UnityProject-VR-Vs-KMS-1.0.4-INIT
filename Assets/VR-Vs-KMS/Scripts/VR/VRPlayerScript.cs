@@ -14,7 +14,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     public TMP_Text healthText, currentHealthText;
     public GameObject canvas;
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
-    public Slider slider;
+    public Slider slider, slider2;
 
     private int previousHealth;
 
@@ -22,8 +22,11 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     {
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
         currentHealth = maxHealth;
+        previousHealth = currentHealth;
         slider.maxValue = maxHealth;
         slider.value = currentHealth;
+        slider2.maxValue = maxHealth;
+        slider2.value = currentHealth;
 
         shieldGO = Instantiate(shieldPrefab, shieldPosition);
         shieldGO.SetActive(false);
@@ -106,6 +109,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     public void SetHealth()
     {
         slider.value = (float)currentHealth;
+        slider2.value = (float)currentHealth;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

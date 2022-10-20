@@ -1,10 +1,17 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShieldScript : MonoBehaviour
 {
     public int currentHealth = 5;
+    private int previousHealth;
+
+    private void Start()
+    {
+        previousHealth = currentHealth;
+    }
 
     public void HitByBall()
     {
@@ -15,5 +22,19 @@ public class ShieldScript : MonoBehaviour
             Debug.Log(currentHealth + "vie shield");
             Destroy(gameObject);
         }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth);
+        }
+        else
+        {
+            currentHealth = (int)stream.ReceiveNext();
+        }
+
+        previousHealth = currentHealth;
     }
 }

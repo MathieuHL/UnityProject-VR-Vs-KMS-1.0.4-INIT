@@ -43,7 +43,6 @@ public class StartLobbyController : MonoBehaviourPunCallbacks
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)_roomSize };
         string roomName = "Room " + randomRoomNumber;
         PhotonNetwork.CreateRoom(roomName, roomOps);
-        GameManager.Instance.roomName = roomName;
         Debug.Log("The room number is " + randomRoomNumber);
     }
 

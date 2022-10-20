@@ -51,6 +51,17 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         {
             photonView.RPC("ChangeShieldState", RpcTarget.AllViaServer);
         }
+
+        if (GameManager.Instance.vrScore > GameManager.Instance.tpsScore && GameManager.Instance.vrScore == 3)
+        {
+            victoryGo.SetActive(true);
+            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
+        }
+        else if (GameManager.Instance.vrScore < GameManager.Instance.tpsScore && GameManager.Instance.tpsScore == 3)
+        {
+            loseGo.SetActive(true);
+            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
+        }
     }
 
     public void HitByBall()
@@ -112,16 +123,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     {
         GameManager.Instance.tpsScore++;
 
-        if (GameManager.Instance.vrScore > GameManager.Instance.tpsScore && GameManager.Instance.vrScore == 3)
-        {
-            victoryGo.SetActive(true);
-            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
-        }
-        else if (GameManager.Instance.vrScore < GameManager.Instance.tpsScore && GameManager.Instance.tpsScore == 3)
-        {
-            loseGo.SetActive(true);
-            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
-        }
+        
     }
 
     public void SetHealth()

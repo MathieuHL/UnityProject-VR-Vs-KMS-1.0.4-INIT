@@ -65,6 +65,17 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
         {
             photonView.RPC("SpawnBullet", RpcTarget.AllViaServer);
         }
+
+        if (GameManager.Instance.vrScore > GameManager.Instance.tpsScore && GameManager.Instance.vrScore == 3)
+        {
+            loseGo.SetActive(true);
+            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
+        }
+        else if (GameManager.Instance.vrScore < GameManager.Instance.tpsScore && GameManager.Instance.tpsScore == 3)
+        {
+            victoryGo.SetActive(true);
+            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
+        }
     }
     /// <summary>
     /// Get the GameObject of the CameraRig
@@ -173,16 +184,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
     {
         GameManager.Instance.vrScore++;
 
-        if (GameManager.Instance.vrScore > GameManager.Instance.tpsScore && GameManager.Instance.vrScore == 3)
-        {
-            loseGo.SetActive(true);
-            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
-        }
-        else if (GameManager.Instance.vrScore < GameManager.Instance.tpsScore && GameManager.Instance.tpsScore == 3)
-        {
-            victoryGo.SetActive(true);
-            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
-        }
+        
     }
 
     public IEnumerator Respawn()

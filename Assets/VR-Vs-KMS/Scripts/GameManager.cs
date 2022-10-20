@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
 
-        PhotonNetwork.LeaveLobby();
+        PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene("InitScene");
     }
 

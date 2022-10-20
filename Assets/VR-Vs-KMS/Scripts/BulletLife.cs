@@ -15,9 +15,6 @@ public class BulletLife : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag != "Player")
-            Destroy(gameObject);
-
         var hit = collider.gameObject;
         Debug.Log("Le NOOOOOOOOOOM " + hit.name);
 
@@ -34,6 +31,7 @@ public class BulletLife : MonoBehaviour
             Debug.Log("It is a player !!");
             shieldScript.HitByBall();
         }
-        Destroy(gameObject);
+        if (collider.gameObject.tag != "contaminationArea")
+            Destroy(gameObject);
     }
 }

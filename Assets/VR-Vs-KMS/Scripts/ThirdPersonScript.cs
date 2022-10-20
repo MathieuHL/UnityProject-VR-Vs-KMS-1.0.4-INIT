@@ -16,7 +16,6 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     public TMP_Text healthText, currentHealthText;
 
     private float speed = 5f;
-    private float firingSpeed = .5f;
     private float TimeBetweenBullet = 0f;
 
     public Material PlayerLocalMat;
@@ -148,7 +147,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     void SpawnBullet(PhotonMessageInfo info)
     {
         TimeBetweenBullet += Time.deltaTime;
-        if (TimeBetweenBullet > firingSpeed)
+        if (TimeBetweenBullet > GameManager.Instance.gameSetting.DelayShoot)
         {
             //Projectile initialisation
             var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, spawnPoint.transform.rotation);
@@ -157,8 +156,17 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
             //Shoot from the player to the RaycastHit from the camera
             if (Physics.Raycast(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
             {
-                Vector3 shootingDirection = hit.point - spawnPoint.position;
-                tempBullet.GetComponent<Rigidbody>().velocity = shootingDirection * speed;
+                if(hit.collider.tag == "contaminationArea")
+                {
+                    Physics.Raycast(mainCamera.transform.position, mainCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, 1);
+                    Vector3 shootingDirection = hit.point - spawnPoint.position;
+                    tempBullet.GetComponent<Rigidbody>().velocity = shootingDirection * speed;
+                }
+                else
+                {
+                    Vector3 shootingDirection = hit.point - spawnPoint.position;
+                    tempBullet.GetComponent<Rigidbody>().velocity = shootingDirection * speed;
+                }                
             }
             else
             {

@@ -10,7 +10,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Transform leftHand, rightHand, spawnPoint, shieldPosition;
     public GameObject ballPrefab, shieldGO, shieldPrefab;
-    public int maxHealth = 1, currentHealth;
+    public int maxHealth = 5, currentHealth;
     public GameObject canvas;
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
     public Slider slider, slider2;
@@ -21,11 +21,12 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     {
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
         currentHealth = maxHealth;
-        previousHealth = currentHealth;
         slider.maxValue = maxHealth;
         slider.value = currentHealth;
         slider2.maxValue = maxHealth;
         slider2.value = currentHealth;
+
+        if (!photonView.IsMine) slider2.gameObject.SetActive(false);
 
         shieldGO = Instantiate(shieldPrefab, shieldPosition);
         shieldGO.SetActive(false);

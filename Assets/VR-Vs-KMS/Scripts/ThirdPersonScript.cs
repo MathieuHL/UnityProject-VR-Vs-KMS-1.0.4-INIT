@@ -48,7 +48,6 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
     {
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
         currentHealth = maxHealth;
-        previousHealth = currentHealth;
         slider.maxValue = maxHealth;
         slider.value = currentHealth;
 

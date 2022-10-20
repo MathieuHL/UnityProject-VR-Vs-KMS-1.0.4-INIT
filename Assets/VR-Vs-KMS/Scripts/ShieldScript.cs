@@ -30,6 +30,9 @@ public class ShieldScript : MonoBehaviourPunCallbacks, IPunObservable
             currentHealth = (int)stream.ReceiveNext();
         }
 
-        previousHealth = currentHealth;
+        if(previousHealth != currentHealth)
+            previousHealth = currentHealth;
+
+        Debug.Log("vie shield " + currentHealth);
     }
 }

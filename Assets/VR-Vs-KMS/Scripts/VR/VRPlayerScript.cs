@@ -118,10 +118,12 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(currentHealth);
+            stream.SendNext(GameManager.Instance.vrScore);
         }
         else
         {
             currentHealth = (int)stream.ReceiveNext();
+            GameManager.Instance.vrScore = (int)stream.ReceiveNext();
         }
 
         if (previousHealth != currentHealth) SetHealth();

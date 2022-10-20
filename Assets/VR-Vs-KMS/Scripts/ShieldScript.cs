@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldScript : MonoBehaviour
+public class ShieldScript : MonoBehaviourPunCallbacks, IPunObservable
 {
     public int currentHealth = 5;
     private int previousHealth;

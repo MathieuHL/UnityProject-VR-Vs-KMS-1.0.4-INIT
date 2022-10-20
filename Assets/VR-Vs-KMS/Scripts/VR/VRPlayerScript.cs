@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Valve.VR;
 
-public class VRPlayerScript : MonoBehaviourPunCallbacks
+public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Transform leftHand, rightHand, spawnPoint, shieldPosition;
     public GameObject ballPrefab, shieldGO, shieldPrefab;

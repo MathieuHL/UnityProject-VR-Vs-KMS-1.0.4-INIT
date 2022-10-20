@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UnityStandardAssets.Cameras;
 using UnityStandardAssets.Characters.ThirdPerson;
 
-public class ThirdPersonScript : MonoBehaviourPunCallbacks
+public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
 {
     public static GameObject UserMeInstance;
     public List<GameObject> pills;

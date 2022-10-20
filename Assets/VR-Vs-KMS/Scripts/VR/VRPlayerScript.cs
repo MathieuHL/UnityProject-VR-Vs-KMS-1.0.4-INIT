@@ -11,7 +11,6 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks
     public Transform leftHand, rightHand, spawnPoint, shieldPosition;
     public GameObject ballPrefab, shieldGO, shieldPrefab;
     public int maxHealth = 1, currentHealth;
-    public TMP_Text healthText, currentHealthText;
     public GameObject canvas;
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
     public Slider slider, slider2;

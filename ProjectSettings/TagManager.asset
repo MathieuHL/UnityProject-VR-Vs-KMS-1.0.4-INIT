@@ -12,6 +12,8 @@ TagManager:
   - contaminationArea
   - SpawnPoints
   - shield
+  - victoryPanel
+  - losePanel
   layers:
   - Default
   - TransparentFX

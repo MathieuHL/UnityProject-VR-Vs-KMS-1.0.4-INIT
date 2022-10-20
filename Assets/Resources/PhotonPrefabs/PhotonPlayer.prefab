@@ -3344,7 +3344,7 @@ GameObject:
   - component: {fileID: 4798047378122222717}
   m_Layer: 0
   m_Name: LosePanel
-  m_TagString: Untagged
+  m_TagString: losePanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3420,7 +3420,7 @@ GameObject:
   - component: {fileID: 1308500043081334997}
   m_Layer: 0
   m_Name: VictoryPanel
-  m_TagString: Untagged
+  m_TagString: victoryPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -66,21 +66,18 @@ public class GameManager : MonoBehaviour
         {
             UpdateGameState(GameState.Final);
 
-            var listVrPlayer = GameObject.FindGameObjectsWithTag("VRPlayer");
-            var listTpsPlayer = GameObject.FindGameObjectsWithTag("Player");
+            var listVictoryScreen = GameObject.FindGameObjectsWithTag("victoryPanel");
+            var listLoseScreen = GameObject.FindGameObjectsWithTag("losePanel");
+            Debug.Log(listLoseScreen + " nombre de liste");
 
-            foreach (GameObject vrPlayer in listVrPlayer)
+            foreach (GameObject victoryPanel in listVictoryScreen)
             {
-                VRPlayerScript player = vrPlayer.GetComponent<VRPlayerScript>();
-                player.victoryGo.SetActive(true);
-                player.enabled = false;
+                victoryPanel.SetActive(true);
             }
 
-            foreach (GameObject tpsPlayer in listTpsPlayer)
+            foreach (GameObject losePanel in listLoseScreen)
             {
-                ThirdPersonScript player = tpsPlayer.GetComponent<ThirdPersonScript>();
-                player.loseGo.SetActive(true);
-                player.enabled = false;
+                losePanel.SetActive(true);
             }
 
             StartCoroutine(CloseRoomNetwork());
@@ -89,21 +86,18 @@ public class GameManager : MonoBehaviour
         {
             UpdateGameState(GameState.Final);
 
-            var listVrPlayer = GameObject.FindGameObjectsWithTag("VRPlayer");
-            var listTpsPlayer = GameObject.FindGameObjectsWithTag("Player");
+            var listVictoryScreen = GameObject.FindGameObjectsWithTag("victoryPanel");
+            var listLoseScreen = GameObject.FindGameObjectsWithTag("losePanel");
+            Debug.Log(listLoseScreen + " nombre de liste");
 
-            foreach (GameObject vrPlayer in listVrPlayer)
+            foreach (GameObject victoryPanel in listVictoryScreen)
             {
-                VRPlayerScript player = vrPlayer.GetComponent<VRPlayerScript>();
-                player.loseGo.SetActive(true);
-                player.enabled = false;
+                victoryPanel.SetActive(true);
             }
 
-            foreach (GameObject tpsPlayer in listTpsPlayer)
+            foreach (GameObject losePanel in listLoseScreen)
             {
-                ThirdPersonScript player = tpsPlayer.GetComponent<ThirdPersonScript>();
-                player.victoryGo.SetActive(true);
-                player.enabled = false;
+                losePanel.SetActive(true);
             }
 
             StartCoroutine(CloseRoomNetwork());

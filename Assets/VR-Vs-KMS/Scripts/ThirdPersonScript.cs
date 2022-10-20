@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.Cameras;
 using UnityStandardAssets.Characters.ThirdPerson;
 
@@ -19,12 +20,9 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
     private float firingSpeed = .5f;
     private float TimeBetweenBullet = 0f;
 
-    public Material PlayerLocalMat;
-    public GameObject GameObjectLocalPlayerColor;
+    public Slider slider;
 
     private RaycastHit hit;
-
-    public HealthbarBehaviour healthbar;
 
     /// <summary>
     /// The FreeLookCameraRig GameObject to configure for the UserMe
@@ -49,7 +47,8 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
 
         maxHealth = GameManager.Instance.gameSetting.LifeNumber;
         currentHealth = maxHealth;
-        healthbar.SetMaxHealth(maxHealth);
+        slider.maxValue = maxHealth;
+        slider.value = currentHealth;
 
         updateGoFreeLookCameraRig();
         followLocalPlayer();
@@ -119,7 +118,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
             }
             catch (System.Exception)
             {
-                GameObjectLocalPlayerColor.GetComponent<Renderer>().material = PlayerLocalMat;
+                
             }
         }
     }
@@ -127,11 +126,11 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
     public void HitByBall()
     {
         if (!photonView.IsMine) return;
-        Debug.Log("Got me and health = " + healthbar.GetHealth());
-        
-        healthbar.SetHealth(healthbar.GetHealth() - 1);
+
+        --currentHealth;
+        SetHealth();
         // Manage to leave room as UserMe
-        if (healthbar.GetHealth() <= 0)
+        if (currentHealth <= 0)
         {
             gameObject.transform.position = new Vector3(200, 200, 200);
 
@@ -170,21 +169,27 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
         yield return new WaitForSeconds(5f);
 
         transform.position = GameManager.Instance.spawnPoints[Random.Range(0, GameManager.Instance.spawnPoints.Length)].transform.position;
-        healthbar.SetMaxHealth(maxHealth);
+        currentHealth = maxHealth;
+        SetHealth();
+    }
+
+    public void SetHealth()
+    {
+        slider.value = (float)currentHealth;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(healthbar.GetHealth());
+            stream.SendNext(currentHealth);
         }
         else
         {
-            healthbar.SetHealth((float)stream.ReceiveNext());
+            currentHealth = (int)stream.ReceiveNext();
         }
 
-        if (previousHealth != healthbar.GetHealth()) healthbar.SetHealth(healthbar.GetHealth() - 1);
-        previousHealth = healthbar.GetHealth();
+        if (previousHealth != currentHealth) SetHealth();
+        previousHealth = currentHealth;
     }
 }

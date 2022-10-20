@@ -273,6 +273,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3793657862611072201}
+  - {fileID: 720076779170430249}
   - {fileID: 4977305617343730500}
   sceneViewId: 0
   InstantiationId: 0
@@ -315,9 +316,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 592717420208269274}
   maxHealth: 1
   currentHealth: 0
-  PlayerLocalMat: {fileID: 2100000, guid: 04c94373b22b860408514118b039584e, type: 2}
-  GameObjectLocalPlayerColor: {fileID: 1433100944206201162}
-  healthbar: {fileID: 814706128031654767}
+  slider: {fileID: 7350193453592449637}
 --- !u!114 &4977305617343730500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3001,7 +3000,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1195732663546639631}
   - component: {fileID: 7350193453592449637}
-  - component: {fileID: 814706128031654767}
   m_Layer: 0
   m_Name: Healthbar
   m_TagString: Untagged
@@ -3080,19 +3078,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &814706128031654767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2279913208622884129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d73a95093e84c964898d50c3eba37dcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 7350193453592449637}
 --- !u!1 &4827650927164196323
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,13 +29,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
-    {
-        CheckScore();
-        Debug.Log(tpsScore + " tps");
-        Debug.Log(vrScore + " vr");
-    }
-
     public void UpdateGameState(GameState newState)
     {
         State = newState;
@@ -60,55 +53,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("test");
     }
 
-    public void CheckScore()
-    {
-        if(vrScore > tpsScore && vrScore == 3)
-        {
-            UpdateGameState(GameState.Final);
-
-            var listVictoryScreen = GameObject.FindGameObjectsWithTag("victoryPanel");
-            var listLoseScreen = GameObject.FindGameObjectsWithTag("losePanel");
-            Debug.Log(listLoseScreen + " nombre de liste");
-
-            foreach (GameObject victoryPanel in listVictoryScreen)
-            {
-                //victoryPanel.SetActive(true);
-            }
-
-            foreach (GameObject losePanel in listLoseScreen)
-            {
-                //losePanel.SetActive(true);
-            }
-
-            StartCoroutine(CloseRoomNetwork());
-        }
-        else if(vrScore < tpsScore && tpsScore == 3)
-        {
-            UpdateGameState(GameState.Final);
-
-            var listVictoryScreen = GameObject.FindGameObjectsWithTag("victoryPanel");
-            var listLoseScreen = GameObject.FindGameObjectsWithTag("losePanel");
-            Debug.Log(listLoseScreen + " nombre de liste");
-
-            foreach (GameObject victoryPanel in listVictoryScreen)
-            {
-                //victoryPanel.SetActive(true);
-            }
-
-            foreach (GameObject losePanel in listLoseScreen)
-            {
-                //losePanel.SetActive(true);
-            }
-
-            StartCoroutine(CloseRoomNetwork());
-        }
-    }
-
-    IEnumerator CloseRoomNetwork()
+    public IEnumerator CloseRoomNetwork()
     {
         yield return new WaitForSeconds(10f);
 
-        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LeaveLobby();
         SceneManager.LoadScene("InitScene");
     }
 

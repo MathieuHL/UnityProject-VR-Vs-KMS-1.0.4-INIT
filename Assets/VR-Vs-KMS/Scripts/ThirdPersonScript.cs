@@ -172,6 +172,17 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
     void UpdateScore(PhotonMessageInfo infp)
     {
         GameManager.Instance.vrScore++;
+
+        if (GameManager.Instance.vrScore > GameManager.Instance.tpsScore && GameManager.Instance.vrScore == 3)
+        {
+            loseGo.SetActive(true);
+            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
+        }
+        else if (GameManager.Instance.vrScore < GameManager.Instance.tpsScore && GameManager.Instance.tpsScore == 3)
+        {
+            victoryGo.SetActive(true);
+            StartCoroutine(GameManager.Instance.CloseRoomNetwork());
+        }
     }
 
     public IEnumerator Respawn()

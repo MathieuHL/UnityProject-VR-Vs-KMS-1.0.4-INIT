@@ -15,7 +15,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
     public Slider slider, slider2;
 
-    private int previousHealth;
+    private int previousHealth=1;
 
     private void Start()
     {

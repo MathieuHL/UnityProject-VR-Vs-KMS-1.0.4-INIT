@@ -26,6 +26,8 @@ public class StartRoomController : MonoBehaviourPunCallbacks
 
     private void StartGame()
     {
+        Debug.Log("fonction start");
+        Debug.Log(PhotonNetwork.MasterClient);
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.Log("Starting Game");

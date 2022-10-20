@@ -26,6 +26,13 @@ public class BulletLife : MonoBehaviour
             vrPlayer.HitByBall();
         }
 
+        ThirdPersonScript tpsPlayer = hit.GetComponent<ThirdPersonScript>();
+        if (tpsPlayer != null)
+        {
+            Debug.Log("It is a player !!");
+            tpsPlayer.HitByBall();
+        }
+
         ShieldScript shieldScript = hit.GetComponent<ShieldScript>();
         if (shieldScript != null)
         {

@@ -11,6 +11,7 @@ TagManager:
   - Teleporting
   - contaminationArea
   - SpawnPoints
+  - Body
   layers:
   - Default
   - TransparentFX

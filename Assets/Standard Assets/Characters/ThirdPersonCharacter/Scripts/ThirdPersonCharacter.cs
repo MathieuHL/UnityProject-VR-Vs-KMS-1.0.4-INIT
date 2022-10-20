@@ -36,6 +36,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		private float playerForward;
 		private float turnAngle;
 
+		private GameObject body;
+		private Vector3 movement;
+
 		void Start()
 		{
 			m_Animator = GetComponent<Animator>();
@@ -48,7 +51,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 
 			cam = GameObject.FindGameObjectWithTag("freeLookCam");
-		}
+			body = GameObject.FindGameObjectWithTag("Body");
+        }
 
 
 		public void Move(Vector3 move, bool crouch, bool jump)
@@ -57,14 +61,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// turn amount and forward amount required to head in the desired
 			// direction.
 			if (move.magnitude > 1f) move.Normalize();
-			move = transform.InverseTransformDirection(move);
+				move = transform.InverseTransformDirection(move);
 			CheckGroundStatus();
 			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
 			m_TurnAmount = Mathf.Atan2(move.x, move.z);
-
+			
 			//Retrieve player ant camera direction
 			camForward = cam.transform.eulerAngles.y + 180;
-			playerForward = player.transform.eulerAngles.y;
+			playerForward = body.transform.eulerAngles.y;
 
 			//Get the shortest angle in degree to rotate the player to the camera
 			turnAngle = camForward - playerForward;
@@ -72,14 +76,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				turnAngle -= 360;
 			else if (turnAngle < -180)
 				turnAngle += 360;
+			
+			//Rotate
+			m_TurnAmount = turnAngle / 45;
 
-			//Rotate the player to the camera only when he's not moving
-			if (move.Equals(new Vector3(0, 0, 0)))
-				m_TurnAmount = turnAngle / 45;
-
+			movement = move;
 			m_ForwardAmount = move.z;
-			ApplyExtraTurnRotation();
-
+			ApplyExtraTurnRotation();//Change to adapt the body movement
+			
 			// control and velocity handling is different when grounded and airborne:
 			if (m_IsGrounded)
 			{
@@ -140,7 +144,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters
-			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
+			m_Animator.SetFloat("Forward", movement.magnitude, 0.1f, Time.deltaTime);
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
@@ -202,8 +206,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
 			// help the character turn faster (this is in addition to root rotation in the animation)
 			float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
-			transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
-		}
+			//transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
+            body.transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
+
+        }
 
 
 		public void OnAnimatorMove()
@@ -212,10 +218,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// this allows us to modify the positional speed before it's applied.
 			if (m_IsGrounded && Time.deltaTime > 0)
 			{
-				Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
+				Vector3 v = movement * 3;
 
-				// we preserve the existing y part of the current velocity.
-				v.y = m_Rigidbody.velocity.y;
+                // we preserve the existing y part of the current velocity.
+                v.y = m_Rigidbody.velocity.y;
 				m_Rigidbody.velocity = v;
 			}
 		}

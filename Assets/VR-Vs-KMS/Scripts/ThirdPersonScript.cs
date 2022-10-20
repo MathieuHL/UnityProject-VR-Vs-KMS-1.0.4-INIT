@@ -127,13 +127,10 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     public void HitByBall()
     {
         if (!photonView.IsMine) return;
-        Debug.Log("Got me and health = " + currentHealth);
-
-        // Manage to leave room as UserMe
 
         --currentHealth;
-        GetComponent<AudioSource>().PlayOneShot(soundHit);
         SetHealth();
+        GetComponent<AudioSource>().PlayOneShot(soundHit);
 
         if (currentHealth <= 0)
         {

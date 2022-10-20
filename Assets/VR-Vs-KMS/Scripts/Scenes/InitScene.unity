@@ -368,7 +368,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 300, y: -172.68}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &21745773
@@ -6628,6 +6628,10 @@ MonoBehaviour:
     NbContaminatedPlayerToVictory: 0
     RadiusExplosion: 0
     TimeToAreaContamination: 0
+  spawnPoints: []
+  tpsScore: 0
+  vrScore: 0
+  roomName: 
 --- !u!1001 &1553631512
 PrefabInstance:
   m_ObjectHideFlags: 0

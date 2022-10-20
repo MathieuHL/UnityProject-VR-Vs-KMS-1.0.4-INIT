@@ -86,7 +86,7 @@ namespace vr_vs_kms
             }
             else if (!playerInZone && virusInZone)
             {
-                inTimer -= Time.deltaTime;
+                inTimer += Time.deltaTime;
                 if (inTimer >= 5f)
                     BelongsToVirus();
             }
@@ -96,13 +96,12 @@ namespace vr_vs_kms
         //Verify if a player enter the zone
         void OnTriggerEnter(Collider collider)
         {
-            if (collider.gameObject.tag == "Player")
-                playerInZone = true;
-            if (collider.gameObject.name == "VRPlayer")
+            if (collider.gameObject.tag == "VRPlayer")
             {
                 virusInZone = true;
-                Debug.Log("hellooo");
             }
+            if (collider.gameObject.tag == "Player")
+                playerInZone = true;
         }
 
         //Verify if a player exit the zone
@@ -136,6 +135,7 @@ namespace vr_vs_kms
         public void BelongsToVirus()
         {
             ColorParticle(pSystem, virus.mainColor, virus.secondColor);
+            Debug.Log("colrs");
         }
 
         public void BelongsToScientists()

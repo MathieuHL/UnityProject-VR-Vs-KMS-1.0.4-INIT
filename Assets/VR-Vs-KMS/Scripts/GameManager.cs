@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     public void SetGameSettings()
     {
         gameSetting = JsonUtility.FromJson<JsonStructure>(File.ReadAllText(Path.Combine(Application.streamingAssetsPath, "GameConfig.json")));
-        Debug.Log("test");
     }
 
     public IEnumerator CloseRoomNetwork()

@@ -19,6 +19,14 @@ public class ShieldScript : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "pills")
+        {
+            Destroy(other);
+        }
+    }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)

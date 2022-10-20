@@ -14,6 +14,7 @@ TagManager:
   - shield
   - victoryPanel
   - losePanel
+  - pills
   layers:
   - Default
   - TransparentFX

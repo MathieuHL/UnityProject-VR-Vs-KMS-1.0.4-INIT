@@ -391,10 +391,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 592717420208269274}
   maxHealth: 1
   currentHealth: 0
-  healthText: {fileID: 0}
-  currentHealthText: {fileID: 0}
-  PlayerLocalMat: {fileID: 2100000, guid: 04c94373b22b860408514118b039584e, type: 2}
-  GameObjectLocalPlayerColor: {fileID: 1433100944206201162}
+  slider: {fileID: 8708398667158007462}
   deathScreen: {fileID: 5402913922653663264}
   soundFire: {fileID: 8300000, guid: 8bec2ea7f94d4a74b9ba4e110ff85df1, type: 3}
   soundHit: {fileID: 8300000, guid: 7a4d375f2b6f77f43825cd330828c75a, type: 3}

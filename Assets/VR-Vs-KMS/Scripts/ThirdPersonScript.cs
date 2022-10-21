@@ -16,7 +16,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     public TMP_Text healthText, currentHealthText;
 
     private float speed = 5f;
-    private float TimeBetweenBullet = 0f;
+    private bool TimeBetweenBullet = true;
 
     public Material PlayerLocalMat;
     public GameObject GameObjectLocalPlayerColor, deathScreen;
@@ -146,8 +146,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
     [PunRPC]
     void SpawnBullet(PhotonMessageInfo info)
     {
-        TimeBetweenBullet += Time.deltaTime;
-        if (TimeBetweenBullet > GameManager.Instance.gameSetting.DelayShoot)
+        if (TimeBetweenBullet)
         {
             //Projectile initialisation
             var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, spawnPoint.transform.rotation);
@@ -175,8 +174,16 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks
 
             //Add some rotation to the projectile
             tempBullet.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
-            TimeBetweenBullet = 0;
+            
+            //Disable the shot during n second depending on the DelayShot
+            TimeBetweenBullet = false;
+            this.Wait(GameManager.Instance.gameSetting.DelayShoot, GetWaitingTime);
         }
+    }
+
+    void GetWaitingTime()
+    {
+        TimeBetweenBullet = true;
     }
 
     public IEnumerator Respawn()

@@ -12,17 +12,17 @@ public class VirusBulletScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag != "VRPlayer")
-            Destroy(gameObject, 0);
-
-        var hit = collider.gameObject;
-
-        ThirdPersonScript tpsPlayer = hit.GetComponent<ThirdPersonScript>();
-        if (tpsPlayer != null)
+        if (collider.gameObject.tag != "VRPlayer" && collider.gameObject.tag != "contaminationArea")
         {
-            Debug.Log("It is a player !!");
-            tpsPlayer.HitByBall();
+            var hit = collider.gameObject;
+
+            ThirdPersonScript tpsPlayer = hit.GetComponent<ThirdPersonScript>();
+            if (tpsPlayer != null)
+            {
+                Debug.Log("It is a player !!");
+                tpsPlayer.HitByBall();
+            }
+            Destroy(gameObject, 0);
         }
-        Destroy(gameObject, 0);
     }
 }

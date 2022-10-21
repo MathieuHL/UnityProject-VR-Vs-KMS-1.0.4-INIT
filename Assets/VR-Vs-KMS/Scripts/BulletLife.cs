@@ -15,24 +15,24 @@ public class BulletLife : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag != "Player")
+        if (collider.gameObject.tag != "Player" && collider.gameObject.tag != "contaminationArea")
+        {
+            var hit = collider.gameObject;
+
+            VRPlayerScript vrPlayer = hit.GetComponent<VRPlayerScript>();
+            if (vrPlayer != null)
+            {
+                vrPlayer.HitByBall();
+            }
+
+            ShieldScript shieldScript = hit.GetComponent<ShieldScript>();
+            if (shieldScript != null)
+            {
+                Debug.Log("It is a ashield !!");
+                shieldScript.HitByBall();
+            }
             Destroy(gameObject);
-
-        var hit = collider.gameObject;
-
-        VRPlayerScript vrPlayer = hit.GetComponent<VRPlayerScript>();
-        if (vrPlayer != null)
-        {
-            vrPlayer.HitByBall();
+            Debug.Log("los tag + " + collider.tag);
         }
-
-        ShieldScript shieldScript = hit.GetComponent<ShieldScript>();
-        if (shieldScript != null)
-        {
-            Debug.Log("It is a ashield !!");
-            shieldScript.HitByBall();
-        }
-        Destroy(gameObject);
-        Debug.Log("los tag + " + collider.tag);
     }
 }

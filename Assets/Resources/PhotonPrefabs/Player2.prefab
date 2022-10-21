@@ -7964,6 +7964,7 @@ MonoBehaviour:
   soundRespawn: {fileID: 8300000, guid: 4be2575f076e80b4b8f1981264ce5ffd, type: 3}
   slider: {fileID: 7039915059534485183}
   slider2: {fileID: 5764135563404853131}
+  isShotable: 0
 --- !u!136 &2233513643494821887
 CapsuleCollider:
   m_ObjectHideFlags: 0

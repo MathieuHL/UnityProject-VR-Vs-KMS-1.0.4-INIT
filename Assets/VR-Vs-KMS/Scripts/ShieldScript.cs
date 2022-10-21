@@ -8,6 +8,7 @@ public class ShieldScript : MonoBehaviourPunCallbacks, IPunObservable
     public int currentHealth = 5;
     private int previousHealth;
 
+    [PunRPC]
     public void HitByBall()
     {
         --currentHealth;

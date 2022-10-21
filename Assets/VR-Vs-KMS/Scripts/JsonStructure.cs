@@ -7,7 +7,7 @@ using UnityEngine;
 public class JsonStructure
 {
     public int LifeNumber;
-    public int DelayShoot;
+    public float DelayShoot;
     public int DelayTeleport;
     public string ColorShotVirus;
     public string ColorShotKMS;

@@ -15,6 +15,7 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     public AudioClip soundFire, soundHit, soundDead, soundRespawn;
     public Slider slider, slider2;
 
+    private bool isShotable=true;
     private int previousHealth;
 
     private void Start()
@@ -86,16 +87,29 @@ public class VRPlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void ThrowBall(PhotonMessageInfo info)
     {
-        float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
+        Debug.Log("shot before if");
+        Debug.Log(isShotable);
+        if (isShotable)
+        {
+            Debug.Log("shot after if");
+            float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
 
-        var shot = Instantiate(ballPrefab, spawnPoint.position, spawnPoint.rotation);
-        GetComponent<AudioSource>().PlayOneShot(soundFire);
+            var shot = Instantiate(ballPrefab, spawnPoint.position, spawnPoint.rotation);
+            GetComponent<AudioSource>().PlayOneShot(soundFire);
 
-        shot.GetComponent<Rigidbody>().velocity = (-spawnPoint.up + spawnPoint.forward) * 25f;
+            shot.GetComponent<Rigidbody>().velocity = (-spawnPoint.up + spawnPoint.forward) * 25f;
 
-        shot.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
+            shot.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
 
-        Destroy(shot, 5.0f);
+            Destroy(shot, 5.0f);
+            isShotable = false;
+            this.Wait(GameManager.Instance.gameSetting.DelayShoot, GetWaitingTime);
+        }
+    }
+
+    void GetWaitingTime()
+    {
+        isShotable = true;
     }
 
     [PunRPC]

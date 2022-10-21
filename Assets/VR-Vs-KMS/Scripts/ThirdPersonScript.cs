@@ -18,7 +18,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
 
     private float speed = 5f;
     private float firingSpeed = .5f;
-    private float TimeBetweenBullet = 0f;
+    private bool timeBetweenBullet = true;
 
     public Slider slider;
     public GameObject deathScreen, victoryGo, loseGo;
@@ -155,8 +155,7 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void SpawnBullet(PhotonMessageInfo info)
     {
-        TimeBetweenBullet += Time.deltaTime;
-        if (TimeBetweenBullet > firingSpeed)
+        if (timeBetweenBullet)
         {
             //Projectile initialisation
             var tempBullet = Instantiate(pills[Random.Range(0, pills.Count)], spawnPoint.position, spawnPoint.transform.rotation);
@@ -175,8 +174,14 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
 
             //Add some rotation to the projectile
             tempBullet.GetComponent<Rigidbody>().angularVelocity = new Vector3((Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000, (Random.value - 0.5f) * 10000);
-            TimeBetweenBullet = 0;
+            timeBetweenBullet = false;
+            this.Wait(GameManager.Instance.gameSetting.DelayShoot, GetWaitingTime);
         }
+    }
+
+    void GetWaitingTime()
+    {
+        timeBetweenBullet = true;
     }
 
     [PunRPC]

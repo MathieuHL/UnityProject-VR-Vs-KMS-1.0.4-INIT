@@ -43,6 +43,7 @@ MonoBehaviour:
   - ChangeShieldState
   - SpawnBullet
   - UpdateScore
+  - HitByBall
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

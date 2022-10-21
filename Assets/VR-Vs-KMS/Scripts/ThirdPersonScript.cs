@@ -66,12 +66,12 @@ public class ThirdPersonScript : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("SpawnBullet", RpcTarget.AllViaServer);
         }
 
-        if (GameManager.Instance.vrScore > GameManager.Instance.tpsScore && GameManager.Instance.vrScore == 3)
+        if (GameManager.Instance.vrScore > GameManager.Instance.tpsScore && GameManager.Instance.vrScore == GameManager.Instance.gameSetting.NbContaminatedPlayerToVictory)
         {
             loseGo.SetActive(true);
             StartCoroutine(GameManager.Instance.CloseRoomNetwork());
         }
-        else if (GameManager.Instance.vrScore < GameManager.Instance.tpsScore && GameManager.Instance.tpsScore == 3)
+        else if (GameManager.Instance.vrScore < GameManager.Instance.tpsScore && GameManager.Instance.tpsScore == GameManager.Instance.gameSetting.NbContaminatedPlayerToVictory)
         {
             victoryGo.SetActive(true);
             StartCoroutine(GameManager.Instance.CloseRoomNetwork());

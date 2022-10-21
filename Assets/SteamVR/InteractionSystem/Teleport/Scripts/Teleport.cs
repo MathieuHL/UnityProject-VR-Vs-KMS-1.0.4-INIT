@@ -7,7 +7,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
-
 namespace Valve.VR.InteractionSystem
 {
 	//-------------------------------------------------------------------------
@@ -111,6 +110,8 @@ namespace Valve.VR.InteractionSystem
 		private bool movedFeetFarEnough = false;
 
 		SteamVR_Events.Action chaperoneInfoInitializedAction;
+
+		private float lastTP;
 
 		// Events
 
@@ -240,71 +241,74 @@ namespace Valve.VR.InteractionSystem
 			Hand oldPointerHand = pointerHand;
 			Hand newPointerHand = null;
 
-			foreach ( Hand hand in player.hands )
+			if (Time.time >= lastTP)
 			{
-				if ( visible )
+				foreach (Hand hand in player.hands)
 				{
-					if ( WasTeleportButtonReleased( hand ) )
+					if (visible)
 					{
-						if ( pointerHand == hand ) //This is the pointer hand
+						if (WasTeleportButtonReleased(hand))
 						{
-							TryTeleportPlayer();
+							if (pointerHand == hand) //This is the pointer hand
+							{
+								TryTeleportPlayer();
+							}
+						}
+					}
+
+					if (WasTeleportButtonPressed(hand))
+					{
+						newPointerHand = hand;
+					}
+				}
+
+				//If something is attached to the hand that is preventing teleport
+				if (allowTeleportWhileAttached && !allowTeleportWhileAttached.teleportAllowed)
+				{
+					HidePointer();
+				}
+				else
+				{
+					if (!visible && newPointerHand != null)
+					{
+						//Begin showing the pointer
+						ShowPointer(newPointerHand, oldPointerHand);
+					}
+					else if (visible)
+					{
+						if (newPointerHand == null && !IsTeleportButtonDown(pointerHand))
+						{
+							//Hide the pointer
+							HidePointer();
+						}
+						else if (newPointerHand != null)
+						{
+							//Move the pointer to a new hand
+							ShowPointer(newPointerHand, oldPointerHand);
 						}
 					}
 				}
 
-				if ( WasTeleportButtonPressed( hand ) )
+				if (visible)
 				{
-					newPointerHand = hand;
-				}
-			}
+					UpdatePointer();
 
-			//If something is attached to the hand that is preventing teleport
-			if ( allowTeleportWhileAttached && !allowTeleportWhileAttached.teleportAllowed )
-			{
-				HidePointer();
-			}
-			else
-			{
-				if ( !visible && newPointerHand != null )
-				{
-					//Begin showing the pointer
-					ShowPointer( newPointerHand, oldPointerHand );
-				}
-				else if ( visible )
-				{
-					if ( newPointerHand == null && !IsTeleportButtonDown( pointerHand ) )
+					if (meshFading)
 					{
-						//Hide the pointer
-						HidePointer();
+						UpdateTeleportColors();
 					}
-					else if ( newPointerHand != null )
+
+					if (onActivateObjectTransform.gameObject.activeSelf && Time.time - pointerShowStartTime > activateObjectTime)
 					{
-						//Move the pointer to a new hand
-						ShowPointer( newPointerHand, oldPointerHand );
+						onActivateObjectTransform.gameObject.SetActive(false);
 					}
 				}
-			}
-
-			if ( visible )
-			{
-				UpdatePointer();
-
-				if ( meshFading )
+				else
 				{
-					UpdateTeleportColors();
-				}
-
-				if ( onActivateObjectTransform.gameObject.activeSelf && Time.time - pointerShowStartTime > activateObjectTime )
-				{
-					onActivateObjectTransform.gameObject.SetActive( false );
-				}
-			}
-			else
-			{
-				if ( onDeactivateObjectTransform.gameObject.activeSelf && Time.time - pointerHideStartTime > deactivateObjectTime )
-				{
-					onDeactivateObjectTransform.gameObject.SetActive( false );
+					if (onDeactivateObjectTransform.gameObject.activeSelf && Time.time - pointerHideStartTime > deactivateObjectTime)
+					{
+						onDeactivateObjectTransform.gameObject.SetActive(false);
+					}
 				}
 			}
 		}
@@ -907,6 +911,7 @@ namespace Valve.VR.InteractionSystem
 			}
 
 			Teleport.Player.Send( pointedAtTeleportMarker );
+			lastTP = Time.time + 5.0f;
 		}
 
 

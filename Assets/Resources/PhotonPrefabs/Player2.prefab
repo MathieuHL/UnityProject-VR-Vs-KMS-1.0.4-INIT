@@ -5091,7 +5091,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057470021401568365}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8607728332551245264}
@@ -7964,7 +7964,6 @@ MonoBehaviour:
   soundRespawn: {fileID: 8300000, guid: 4be2575f076e80b4b8f1981264ce5ffd, type: 3}
   slider: {fileID: 7039915059534485183}
   slider2: {fileID: 5764135563404853131}
-  isShotable: 0
 --- !u!136 &2233513643494821887
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7975,7 +7974,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 2.6486397
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
@@ -9506,6 +9505,10 @@ PrefabInstance:
     - target: {fileID: 11445746, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
       propertyPath: traceLayerMask.m_Bits
       value: 311
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445746, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
+      propertyPath: DisableTP
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}

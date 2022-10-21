@@ -1,6 +1,6 @@
 {
     "LifeNumber": 5,
-    "DelayShoot": 3,
+    "DelayShoot": 1.5,
     "DelayTeleport": 2,
     "ColorShotVirus": "Red",
     "ColorShotKMS": "Green",
